@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>CURSO ESG - FRENTES DE IMPLANTAÇÃO</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">CURSO ESG - FRENTES DE IMPLANTAÇÃO</h1>
+
+    <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="socioUDV">
+        <label class="form-check-label" for="socioUDV">Sócio da UDV</label>
+    </div>
+
+    <div class="mb-3">
+        <label for="paymentOption" class="form-label">Opção de Pagamento</label>
+        <select class="form-select" id="paymentOption" required>
+            <option value="" selected>Escolha uma opção...</option>
+            <option value="pix">PIX / BOLETO</option>
+            <option value="card">CARTÃO</option>
+        </select>
+    </div>
+
+	<div id="paymentLink" style="display: none;">
+		<div class="mb-3">
+			<a href="#" id="link" class="btn btn-primary" target="_blank">LINK DE PAGAMENTO</a>
+		</div>
+		
+		<div class="mb-3">
+			<strong>VALOR DO CURSO:</strong> <span id="valor">R$ 0,00</span>
+		</div>
+	</div>
+
+	<div class="text-center mb-5 mt-5">
+		<img src="https://drive.google.com/uc?id=1HOC7O_fWR5AStmvtaAJAbmotR3KBcUxv" alt="Descrição da Imagem" style="width:100%; max-width:600px;">
+	</div>
+
+</div>
+
+<script>
+
+    function fchange() {
+
+            let valor = 0;
+            let socio = document.getElementById('socioUDV').checked;
+            let pix = document.getElementById('paymentOption').value === 'pix';
+            var link = document.getElementById('link');
+            
+            if (socio && pix) { valor = "R$ 390"; link.href = "https://www.asaas.com/c/405051728452";  }
+            if (socio && !pix) { valor = "R$ 402"; link.href = "https://www.asaas.com/c/717936412168"; }
+            if (!socio && pix) { valor = "R$ 490"; link.href = "https://www.asaas.com/c/739704290311"; }
+            if (!socio && !pix) {valor = "R$ 505";  link.href = "https://www.asaas.com/c/072407092943"; }
+            document.getElementById('valor').innerText = valor;
+
+            var paymentLinkDiv = document.getElementById('paymentLink');
+            paymentLinkDiv.style.display = 'block';
+        }
+
+    
+    
+    document.getElementById('paymentOption').addEventListener('change',fchange );
+    document.getElementById('socioUDV').addEventListener('change',fchange );
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
