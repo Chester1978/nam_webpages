@@ -5,9 +5,24 @@
         <link rel="icon" type="image/x-icon" href="/nam_webpages/favicon.ico">
         <title>RELATÓRIO VALOR REAL - EXPORTAR ARQUIVOS</title>
     </head>
+    <style>
+        /* tela de abertura: fica até a primeira renderização (a lista do Drive demora; na primeira vez, mais) */
+        #splash { font-family: Arial, sans-serif; text-align: center; padding: 60px 16px; color: #333; }
+        #splash h1 { font-size: 1.4em; margin-bottom: 8px; }
+        #splash p { margin: 6px 0; }
+        #splash .dots::after { content: ''; animation: pontos 1.5s steps(4, end) infinite; }
+        @keyframes pontos { 0% { content: ''; } 25% { content: '.'; } 50% { content: '..'; } 75% { content: '...'; } }
+    </style>
     <body>
         <div>
-            <div id="app"></div>
+            <div id="app">
+                <div id="splash">
+                    <h1>RELATÓRIO VALOR REAL - EXPORTAR ARQUIVOS</h1>
+                    <p>Carregando a lista de arquivos do Drive<span class="dots"></span></p>
+                    <p style="color:#777">Na primeira vez, ou após atualização da página, pode levar mais de um minuto.</p>
+                    <p style="color:#777">Depois, clique em LER ESQUERDO para escolher a pasta do seu computador.</p>
+                </div>
+            </div>
         </div>
     </body>
     <script>
