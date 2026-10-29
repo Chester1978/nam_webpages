@@ -137,7 +137,7 @@ function ja(a) {
     }), this.B.forEach(b => this.h.observe(b, {childList:!0, subtree:!0}))) : (this.h.disconnect(), this.h = null));
   }
 }
-var w = new WeakMap(), z = new ka();
+var w = new WeakMap(), y = new ka();
 const A = {[6]:1, [5]:1, [7]:1, [1]:10, [4]:1, [3]:1, [2]:10, [8]:1, [9]:1, [16]:0, [10]:-100.11, [11]:-100.33, [12]:0, [13]:2, [14]:8, [15]:0};
 function B(a, b) {
   a = document.createElement(a);
@@ -303,7 +303,7 @@ function xa(a, b, c, d) {
   m.length && (a.C.push({step:1, F:m.length, l:() => m.forEach(l => {
     l = b.i[l].g;
     c.g.appendChild(l);
-    z.j || za(l);
+    y.j || za(l);
   })}), m.forEach(l => g.push({G:l, U:Number.NaN, M:g.length})));
   if (g.reduce((l, n) => l || n.M !== n.G, !1)) {
     let l = g.sort((n, p) => n.G < p.G ? -1 : n.G === p.G ? 0 : 1).map(n => n.M);
@@ -360,7 +360,7 @@ function ta(a, b, c) {
   }});
 }
 function ua(a, b, c) {
-  let d = z.g.get(b.g) ?? [], e = z.g.get(c.g) ?? [], f = [], g = [], k = [];
+  let d = y.g.get(b.g) ?? [], e = y.g.get(c.g) ?? [], f = [], g = [], k = [];
   e.forEach((h, m) => {
     let l = !0;
     d.forEach((n, p) => {
@@ -378,13 +378,13 @@ function ua(a, b, c) {
   f.length && a.C.push({step:9, F:f.length, l:() => {
     f.forEach(h => c.g.removeEventListener(e[h].event, e[h].l));
     f.sort((h, m) => h < m ? 1 : m < h ? -1 : 0).forEach(h => e.splice(h, 1));
-    z.g.set(c.g, e);
+    y.g.set(c.g, e);
   }});
   g.length && a.C.push({step:8, F:g.length, l:() => {
     g.forEach(h => {
       c.g.addEventListener(d[h].event, d[h].l);
       e.push({event:d[h].event, l:d[h].l, hash:d[h].hash});
-      z.g.set(c.g, e);
+      y.g.set(c.g, e);
     });
   }});
   k.length && a.C.push({step:16, F:k.length, l:() => {
@@ -395,7 +395,7 @@ function ua(a, b, c) {
       c.g.addEventListener(h.event, h.l);
       m.l = h.l;
     });
-    z.g.set(c.g, e);
+    y.g.set(c.g, e);
   }});
 }
 function Ba(a) {
@@ -504,10 +504,10 @@ class Ha {
 }
 function Ia(a) {
   return new Proxy(a, {get:(b, c) => c === "addEventListener" ? (d, e, f) => {
-    z.i(b, d, e);
+    y.i(b, d, e);
     return b.addEventListener(d, e, f);
   } : typeof b[c] === "function" ? b[c].bind(b) : b[c], set:(b, c, d) => {
-    typeof c === "string" && c.toLowerCase().startsWith("on") ? (c = c.substring(2), z.i(b, c, d), b.addEventListener(c, d)) : b[c] = d;
+    typeof c === "string" && c.toLowerCase().startsWith("on") ? (c = c.substring(2), y.i(b, c, d), b.addEventListener(c, d)) : b[c] = d;
     return !0;
   }});
 }
@@ -1423,10 +1423,10 @@ function U(a) {
     let n = m.A === 2, p = e.includes(m.I), [t, u] = h, v = Nb(m, t, u, f.h);
     for (let x of h) {
       if (n ? m.g[x] = l ? p ? 2 : 1 : 5 : m.u[x] && (m.g[x] = 3), l) {
-        var y = v[x];
-        let fc = y === 1 || y === 0 ? "gray" : y === 3 ? "purple" : y === 2 ? "red" : "purple";
-        y = H => typeof H === "function" ? H(fc) : H;
-        let hc = n ? p ? y(T.ja) : y(T.ca) : y(T.da);
+        var z = v[x];
+        let fc = z === 1 || z === 0 ? "gray" : z === 3 ? "purple" : z === 2 ? "red" : "purple";
+        z = H => typeof H === "function" ? H(fc) : H;
+        let hc = n ? p ? z(T.ja) : z(T.ca) : z(T.da);
         m.$[x] = function() {
           let H = `span class="${Sb.sa}"`;
           return m.N[x] ? `<${H}>${m.j[x]}</span>${hc} ${m.name}` : `<${H}>${m.j[x]}</span>`;
@@ -1445,8 +1445,8 @@ function U(a) {
     for (; p.depth > 1;) {
       var t = l, u = p, v = m;
       if (u.A === 1) {
-        let y = u.u[v];
-        y && (g && g(y) || u.parent.o[v]++);
+        let z = u.u[v];
+        z && (g && g(z) || u.parent.o[v]++);
       }
       t = u.N[v] ? u.A === 1 ? u.parent.o[v] === u.parent.B[v] ? "\u2514\u2500" : "\u251c\u2500" : u.h < u.parent.i[v] ? "\u2502&nbsp" : u.h == u.parent.i[v] ? t.depth === u.depth ? "\u2514\u2500" : "&nbsp&nbsp" : "ab" : u.h < u.parent.i[v] ? "\u2502&nbsp" : "&nbsp&nbsp";
       t === void 0 && (t = "p");
@@ -1603,9 +1603,14 @@ async function ic(a) {
 }
 async function X(a, b) {
   await Fa(a.source.el, a.i.C, {R:a.i.R}, a.i.rate);
-  b && a.source.model && a.source.model.send("WMSGRELOAD=" + a.j, void 0, []);
+  b && a.source.model && a.source.model.send("WMSGRELOAD=" + a.o, void 0, []);
 }
 async function lc(a) {
+  if (!a.j) {
+    a.j = !0;
+    const b = await W.get("VERSAO");
+    b !== "2026-10-29" && (await W.clear(), await W.set("VERSAO", "2026-10-29"), console.log(`cache reiniciado: vers\u00e3o ${b ?? "(nenhuma)"} -> ${"2026-10-29"}`), await V(a.g));
+  }
   a.h = await W.get("FT DT-I") ?? a.h;
   a.g.i = await W.get("OF") ?? [];
   await Vb(a.g);
@@ -1633,7 +1638,8 @@ class mc {
     this.i = {rate:1000, R:!0, C:() => {
     }};
     this.source = a;
-    this.j = (new Date()).toISOString();
+    this.o = (new Date()).toISOString();
+    this.j = !1;
     ic(this);
   }
 }
