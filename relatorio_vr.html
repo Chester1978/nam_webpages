@@ -1,346 +1,555 @@
- 
-            <html lang="pt">
-                <head>
-                </head>
-
-                <body>
-                    <div>
-                        <div id="app"></div>
-                    </div>
-                </body>
-
-                <script>
-                (function(){/*
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" type="image/x-icon" href="/nam_webpages/favicon.ico">
+        <title>RELATÓRIO VALOR REAL - EXPORTAR ARQUIVOS</title>
+    </head>
+    <body>
+        <div>
+            <div id="app"></div>
+        </div>
+    </body>
+    <script>
+(function(){/*
 
  Copyright The Closure Library Authors.
  SPDX-License-Identifier: Apache-2.0
 */
 var aa = this || self;
-function ba(a, b, c, d) {
-  if (b.j !== c.j) {
-    a.status = t;
-  } else if (b.id || c.id) {
-    a.status = b.id === c.id ? ca : t;
-  }
-  if (a.status !== t) {
-    var e = c.l.reduce((g, m) => {
-      da(b, m.key) || g.push(m.key);
-      return g;
-    }, []);
-    e.length && a.g.push({step:ea, I:e.length, B:() => e.forEach(g => c.h.removeAttribute(g))});
-    var f = b.l.reduce((g, m) => {
-      var k;
-      a: {
-        for (k = 0; k < c.l.length; k++) {
-          if (m.key === c.l[k].key) {
-            k = c.l[k].value;
-            break a;
-          }
-        }
-        k = void 0;
-      }
-      k !== m.value && g.push(m);
-      return g;
-    }, []);
-    f.length && a.g.push({step:fa, I:f.length, B:() => f.forEach(g => c.h.setAttribute(g.key, g.value))});
-    var h = b.m.reduce((g, m) => {
-      var k;
-      a: {
-        for (k = 0; k < c.m.length; k++) {
-          if (m.key === c.m[k].key) {
-            k = c.m[k].value;
-            break a;
-          }
-        }
-        k = void 0;
-      }
-      k !== m.value && g.push(m);
-      return g;
-    }, []);
-    h.length && a.g.push({step:ha, I:h.length, B:() => h.forEach(g => {
-      c.node instanceof HTMLInputElement && ("value" === g.key && (c.node.value = g.value), "checked" === g.key && (c.node.checked = g.value));
-    })});
-    b.v !== c.v && a.g.push({step:ia, I:1, B:() => {
-      c.node.textContent = b.v;
-    }});
-    if (d) {
-      let g = ja(d, b.node), m = ja(d, c.node), k = [], n = [];
-      m.forEach((l, p) => {
-        let q = !0;
-        g.forEach(r => {
-          l.event === r.event && l.hash === r.hash && (q = !1);
-        });
-        q && k.push(p);
-      });
-      g.forEach((l, p) => {
-        let q = !0;
-        m.forEach(r => {
-          r.event === l.event && r.hash === l.hash && (q = !1);
-        });
-        q && n.push(p);
-      });
-      k.length && a.g.push({step:ka, I:k.length, B:() => {
-        k.forEach(l => c.node.removeEventListener(m[l].event, m[l].B));
-        k.sort((l, p) => l < p ? 1 : p < l ? -1 : 0).forEach(l => m.splice(l, 1));
-        d.g.set(c.node, m);
-      }});
-      n.length && a.g.push({step:la, I:n.length, B:() => {
-        n.forEach(l => {
-          c.node.addEventListener(g[l].event, g[l].B);
-          m.push({event:g[l].event, B:g[l].B, hash:g[l].hash});
-          d.g.set(c.node, m);
-        });
-      }});
-    }
+function ba(a, b) {
+  a = a.split(".");
+  var c = aa;
+  a[0] in c || typeof c.execScript == "undefined" || c.execScript("var " + a[0]);
+  for (var d; a.length && (d = a.shift());) {
+    a.length || b === void 0 ? c[d] && c[d] !== Object.prototype[d] ? c = c[d] : c = c[d] = {} : c[d] = b;
   }
 }
-function ma(a, b, c, d) {
-  let e = b.g.map(() => !1), f = c.g.map(() => !1), h = [], g = [];
-  b.g.forEach((n, l) => {
-    c.g.forEach((p, q) => {
-      e[l] || f[q] || (p = new na(n, p, d), p.status !== t && (p.status === ca || 0 === p.h ? (e[l] = !0, f[q] = !0, h.push({H:l, U:q, L:q}), p.status === ca ? a.m++ : a.l++, a.j.push(p)) : g.push({ba:l, $:q, V:p, Ia:p.h, selected:!1})));
-    });
-  });
-  0 < g.length && (g = g.sort((n, l) => n.V.h < l.V.h ? -1 : n.V.h === l.V.h ? 0 : 1), g.forEach(n => {
-    e[n.ba] || f[n.$] || (e[n.ba] = !0, f[n.$] = !0, n.selected = !0, h.push({H:n.ba, U:n.$, L:n.$}), a.j.push(n.V));
-  }));
-  let m = f.reduce((n, l, p) => l ? n : [...n, p], []);
-  m.length && (a.g.push({step:oa, I:m.length, B:() => m.forEach(n => {
-    c.node.removeChild(c.g[n].node);
-  })}), m.forEach(n => {
-    h = h.map(l => n > l.U ? l : {H:l.H, U:l.U, L:l.L - 1});
-  }));
-  let k = e.reduce((n, l, p) => l ? n : [...n, p], []);
-  k.length && (a.g.push({step:pa, I:k.length, B:() => k.forEach(n => {
-    c.node.appendChild(b.g[n].node);
-  })}), k.forEach(n => h.push({H:n, U:Number.NaN, L:h.length})));
-  if (h.reduce((n, l) => n || l.L !== l.H, !1)) {
-    let n = h.sort((l, p) => l.H < p.H ? -1 : l.H === p.H ? 0 : 1).map(l => l.L);
-    a.g.push({step:qa, I:1, B:() => {
-      for (let l = 0; l < n.length; l++) {
-        if (l != n[l]) {
-          let p = n[l];
-          if (c.node instanceof HTMLElement || c.node instanceof SVGElement) {
-            let q = c.node.childNodes[l], r = c.node.childNodes[p];
-            n.splice(l, 1, l);
-            n = n.map(v => v + (v >= l && v < p ? 1 : 0));
-            c.node.insertBefore(r, q);
-          }
-        }
-      }
-    }});
+;function q() {
+  let a = window.location.search.substring(1).split("&"), b = {};
+  for (let c = 0; c < a.length; ++c) {
+    let d = a[c].split("=", 2);
+    b[d[0]] = d.length == 1 ? "" : decodeURIComponent(d[1].replace(/\+/g, " "));
   }
-}
-function ra(a) {
-  if (a.status === t) {
-    return 0;
-  }
-  let b = 0;
-  a.g.forEach(c => b += sa[c.step] * c.I);
-  b += sa[ta] * a.l;
-  b += sa[ua] * a.m;
-  a.j.forEach(c => b += c.h);
   return b;
 }
-class na {
-  constructor(a, b, c, d) {
-    this.g = [];
-    this.status = va;
-    this.j = [];
-    this.h = Number.NaN;
-    this.m = this.l = 0;
-    if (!0 !== d && (ba(this, a, b, c), this.status === t)) {
-      return;
-    }
-    if (u.has(a.h)) {
-      d = u.get(a.h);
-      if (!u.has(b.h)) {
-        var e = b.h.attachShadow({mode:d.mode});
-        u.set(b.h, e);
-      }
-      e = u.get(b.h);
-      wa(d, e, c);
-    } else {
-      u.has(b.h) && (this.status = t, console.log("n\u00e3o tira sr"));
-    }
-    this.status !== t && (ma(this, a, b, c), this.h = ra(this));
+ba("lt_cursor$$module$2023$ploft$js_dev$src$frontend$0$domedit", "default alias all-scroll auto cell col-resize context-menu copy crosshair e-resize ew-resize grab grabbing help move n-resize ne-resize nesw-resize ns-resize nw-resize nwse-resize no-drop none not-allowed pointer progress row-resize s-resize se-resize sw-resize text url w-resize wait zoom-in zoom-out".split(" "));
+function ca(a) {
+  function b(g) {
+    return (g = typeof g === "string" ? g.match(/(\d+):(\d+)/) : null) ? parseInt(g[1], 10) / parseInt(g[2], 10) : null;
   }
-  update() {
-    this.j.forEach(a => {
-      a.update();
-    });
-    this.g.forEach(a => {
-      try {
-        a.B();
-      } catch (b) {
-        console.error(a.step, b);
-      }
-    });
+  let c = a.ka === 0, d = a.el;
+  do {
+    d.style.height = "100%";
+    d.style.width = "100%";
+    d.style.margin = 0;
+    if (!c || d.tagName === "HTML") {
+      break;
+    }
+    d = d.parentNode;
+  } while (d);
+  let e = null, f = b(a.ua);
+  a.ka & 1 && f && (e = () => {
+    document.body.contains(a.el) ? f && (a.el.style.height = `${Math.round(a.el.offsetWidth / f)}px`) : window.removeEventListener("resize", e);
+  }, window.addEventListener("resize", e), a.el.style.overflow = "auto", setTimeout(() => e(), 0));
+  a.Ka = g => {
+    f = b(g);
+    e && e();
+  };
+}
+;class da {
+  constructor(a) {
+    this.g = a;
+  }
+  get i() {
+    return this.g;
+  }
+  get input() {
+    return this.g;
+  }
+  get button() {
+    return this.g;
+  }
+  get style() {
+    return this.g;
+  }
+  get j() {
+    return this.g;
+  }
+  get O() {
+    return this.g;
+  }
+  get h() {
+    return this.g;
+  }
+  get a() {
+    return this.g;
+  }
+  get label() {
+    return this.g;
   }
 }
-function wa(a, b, c) {
-  let d = "string" !== typeof a ? a : xa("div", f => f.innerHTML = a);
-  b instanceof ShadowRoot && d instanceof HTMLElement && d.attributes.length && (d = xa("div", f => f.appendChild(d)));
-  let e = ya(d);
-  b = ya(b);
-  (new na(e, b, c, !0)).update();
+;const r = new WeakMap(), ea = new WeakMap();
+function w(a, b) {
+  var c = new Date(a);
+  a = c.getDate().toString().padStart(2, "0");
+  const d = (c.getMonth() + 1).toString().padStart(2, "0"), e = c.getFullYear(), f = c.getHours().toString().padStart(2, "0"), g = c.getMinutes().toString().padStart(2, "0");
+  c = c.getSeconds().toString().padStart(2, "0");
+  return b ? `${a}-${d}-${e} ${f}:${g}:${c}` : `${d}-${a}-${e} ${f}:${g}:${c}`;
 }
-;function ya(a) {
-  function b(e) {
-    d.currentNode.childNodes.length !== e.g.length ? (d.firstChild(), e = new za(d.currentNode, e), b(e)) : d.nextSibling() ? (e = new za(d.currentNode, e.A), b(e)) : (d.parentNode(), d.currentNode && e.A && b(e.A));
+function fa(a) {
+  return `${a.getFullYear()}-${(a.getMonth() + 1).toString().padStart(2, "0")}-${a.getDate().toString().padStart(2, "0")}`;
+}
+;class ha {
+  constructor() {
+    this.g = new WeakMap();
+    this.i = (a, b, c) => {
+      let d = this.g.get(a);
+      d || (d = [], this.g.set(a, d));
+      if (!z.has(c)) {
+        a = c.toString();
+        let e = 0;
+        for (let f = 0; f < a.length; f++) {
+          e = (e << 5) - e + a.charCodeAt(f), e |= 0;
+        }
+        z.set(c, e);
+      }
+      a = z.get(c);
+      d.push({event:b, l:c, hash:a});
+    };
+    this.h = null;
+    this.B = typeof document !== "undefined" ? [document.body] : [];
+    this.o = [];
   }
-  function c(e) {
-    e.g = e.g.filter(f => {
-      let h = f.node instanceof Text ? 0 < f.node.textContent.trim().length : !0;
-      h || e.node.removeChild(f.node);
-      return h;
+  get j() {
+    return !!this.h;
+  }
+  set j(a) {
+    a !== !!this.h && (a ? (this.h = new MutationObserver(b => {
+      b.forEach(c => {
+        this.o.forEach(d => d(c));
+      });
+    }), this.B.forEach(b => this.h.observe(b, {childList:!0, subtree:!0}))) : (this.h.disconnect(), this.h = null));
+  }
+}
+var z = new WeakMap(), A = new ha();
+const B = {[6]:1, [5]:1, [7]:1, [1]:10, [4]:1, [3]:1, [2]:10, [8]:1, [9]:1, [16]:0, [10]:-100.11, [11]:-100.33, [12]:0, [13]:2, [14]:8, [15]:0};
+function C(a, b) {
+  a = document.createElement(a);
+  if (b.H) {
+    for (let [c, d] of Object.entries(b.H)) {
+      c.startsWith("_") || a.setAttribute(c.replace("_", "-"), d);
+    }
+  }
+  b.parent && b.parent.appendChild(a);
+  b.l && b.l(a);
+  return a;
+}
+;function ia(a) {
+  function b(f) {
+    if (d.currentNode.childNodes.length !== f.i.length) {
+      return d.firstChild(), new ja(d.currentNode, f);
+    }
+    if (d.nextSibling()) {
+      return new ja(d.currentNode, f.parent);
+    }
+    d.parentNode();
+    if (d.currentNode && f.parent) {
+      return f.parent;
+    }
+  }
+  function c(f) {
+    f.i = f.i.filter(g => {
+      let k = g.g instanceof Text ? g.g.textContent.trim().length > 0 : !0;
+      k || f.g.removeChild(g.g);
+      return k;
     });
-    e.g.forEach(f => c(f));
+    f.i.forEach(g => c(g));
   }
-  let d = document.createTreeWalker(a, NodeFilter.SHOW_ALL);
-  a = new za(a);
-  b(a);
+  let d = document.createTreeWalker(a, NodeFilter.SHOW_ALL), e = a = new ja(a);
+  for (; e = b(e), e !== void 0;) {
+  }
   c(a);
   return a;
 }
-function da(a, b) {
-  return b ? a.l.reduce((c, d) => c || d.key === b, !1) : a.node instanceof HTMLElement ? !0 : !1;
-}
-function Aa(a) {
+function ka(a) {
   let b = [];
   var c = [];
-  if (a.node instanceof HTMLElement || a.node instanceof SVGElement) {
-    c = a.node.attributes;
-    for (let d = 0; d < c.length; d++) {
-      b.push(c[d]);
+  if (a.g instanceof HTMLElement || a.g instanceof SVGElement) {
+    a = a.g.attributes;
+    for (c = 0; c < a.length; c++) {
+      b.push(a[c]);
     }
     c = b.reduce((d, e) => {
-      "id" === e.localName && (a.id = e.value);
       d.push({key:e.localName, value:e.value});
       return d;
     }, []);
   }
   return c;
 }
-class za {
+function D(a, b) {
+  for (let c = 0; c < a.H.length; c++) {
+    if (b === a.H[c].key) {
+      return a.H[c].value;
+    }
+  }
+}
+function la(a, b) {
+  return b ? a.H.reduce((c, d) => c || d.key === b, !1) : a.g instanceof HTMLElement ? !0 : !1;
+}
+class ja {
   constructor(a, b) {
-    b && (this.A = b);
-    this.node = a;
-    this.g = [];
-    b && b.g.push(this);
-    this.v = null;
-    this.l = Aa(this);
-    this.m = [];
-    this.id = "";
-    a instanceof HTMLElement || a instanceof SVGElement ? (this.h = a, this.j = this.h.localName, a instanceof HTMLInputElement && (this.m.push({key:"value", value:a.value}), this.m.push({key:"checked", value:a.checked}))) : a instanceof Text ? (this.j = Ba, this.v = a.textContent) : a instanceof ShadowRoot ? this.j = Ca : a instanceof Comment ? this.j = Da : (this.j = a.constructor.name, console.log("TYPE", a, this.j));
+    b && (this.parent = b);
+    this.g = a;
+    this.i = [];
+    b && b.i.push(this);
+    this.B = null;
+    this.H = ka(this);
+    this.j = [];
+    a instanceof HTMLElement || a instanceof SVGElement ? (this.h = a, this.o = this.h.localName, a instanceof HTMLInputElement ? (this.j.push({key:"value", value:a.value}), this.j.push({key:"checked", value:a.checked})) : a instanceof HTMLSelectElement ? this.j.push({key:"value", value:a.value}) : a instanceof HTMLTextAreaElement && this.j.push({key:"value", value:a.value})) : a instanceof Text ? (this.o = "-Text", this.B = a.textContent) : this.o = a instanceof ShadowRoot ? "div" : a instanceof 
+    Comment ? "!--" : a.constructor.name;
+  }
+  get id() {
+    return D(this, "id") ?? "";
+  }
+  get lid() {
+    return D(this, "lid") ?? "";
   }
   toString(a = 0) {
     const b = "    ".repeat(a);
-    let c = `${b}<${this.j}>\n`;
-    this.g.forEach(d => {
+    let c = `${b}<${this.o}>\n`;
+    this.i.forEach(d => {
       c += `${d.toString(a + 1)}`;
     });
-    return c += `${b}</${this.j}>\n`;
+    return c += `${b}</${this.o}>\n`;
   }
 }
-;var pa = 1, oa = 2, qa = 3, ia = 4, fa = 5, ea = 6, ha = 7, la = 8, ka = 9, ta = 10, ua = 11, Ba = "-Text", Da = "!--", Ca = "div", t = 1, va = 2, ca = 3;
-function ja(a, b) {
-  return (a = a.g.get(b)) ? a : [];
+;const ma = new WeakMap();
+function na(a, b, c) {
+  b = b.trim().split(/\s+/);
+  const d = e => !c.includes(e);
+  a = a.trim().split(/\s+/).filter(d);
+  b = b.filter(d);
+  a = new Set(a);
+  b = new Set(b);
+  if (a.size !== b.size) {
+    return !1;
+  }
+  for (const e of a) {
+    if (!b.has(e)) {
+      return !1;
+    }
+  }
+  return !0;
 }
-class Ea {
-  constructor() {
-    this.g = new WeakMap();
-    this.h = (a, b, c) => {
-      let d = this.g.get(a);
-      d || (d = [], this.g.set(a, d));
-      if (!Fa.has(c)) {
-        a = c.toString();
-        let e = 0;
-        for (let f = 0; f < a.length; f++) {
-          e = (e << 5) - e + a.charCodeAt(f), e |= 0;
+var oa = (a, b, c, d) => {
+  let e = [];
+  const f = [];
+  c.H.forEach(h => {
+    la(b, h.key) || e.push(h.key);
+  });
+  let g = !1, k = [];
+  if (d.la) {
+    const h = (D(c, "class") ?? "").trim().split(/\s+/);
+    d.la.class.trim().split(/\s+/).every(m => h.includes(m)) && (g = !0, k = d.la.keys);
+  }
+  g && (e = e.filter(h => !k.includes(h)));
+  b.H.forEach(h => {
+    const m = D(c, h.key);
+    g && k.includes(h.key) || (h.key === "class" ? na(h.value, m ?? "", d.La ?? []) || f.push(h) : m !== h.value && f.push(h));
+  });
+  e.length && a.C.push({step:6, F:e.length, l:() => e.forEach(h => c.h.removeAttribute(h))});
+  f.length && a.C.push({step:5, F:f.length, l:() => f.forEach(h => c.h.setAttribute(h.key, h.value))});
+};
+function pa(a, b, c, d) {
+  b.o !== c.o && (a.status = 1);
+  a.status !== 1 && (oa(a, b, c, d), qa(a, b, c), ra(a, b, c), sa(a, b, c));
+}
+function ta(a, b, c, d) {
+  let e = r.get(b.h);
+  if (e) {
+    var f = r.get(c.h);
+    f ? a.C.push({step:13, F:1, l:() => {
+      ua(e, f, d);
+    }}) : a.C.push({step:14, F:1, l:() => {
+      f = c.h.attachShadow({mode:e.mode});
+      r.set(c.h, f);
+      ua(e, f, d);
+    }});
+  }
+}
+function va(a, b, c, d) {
+  let e = b.i.map(() => !1), f = c.i.map(() => !1), g = [], k = [];
+  b.i.forEach((l, n) => {
+    e[n] || c.i.forEach((p, t) => {
+      e[n] || f[t] || (p = new wa(l, p, d), p.status !== 1 && (p.status === 4 || p.g === 0 ? (e[n] = !0, f[t] = !0, g.push({G:n, U:t, M:t}), p.status === 4 ? a.j++ : a.i++, a.h.push(p)) : k.push({aa:n, X:t, O:p, Ia:p.g, selected:!1})));
+    });
+  });
+  k.length > 0 && (k = k.sort((l, n) => l.O.g < n.O.g ? -1 : l.O.g === n.O.g ? 0 : 1), k.forEach(l => {
+    e[l.aa] || f[l.X] || (e[l.aa] = !0, f[l.X] = !0, l.selected = !0, g.push({G:l.aa, U:l.X, M:l.X}), a.h.push(l.O));
+  }));
+  let h = f.reduce((l, n, p) => n ? l : [...l, p], []);
+  h.length && (a.C.push({step:2, F:h.length, l:() => h.forEach(l => {
+    c.g.removeChild(c.i[l].g);
+  })}), h.forEach(l => {
+    g = g.map(n => l > n.U ? n : {G:n.G, U:n.U, M:n.M - 1});
+  }));
+  let m = e.reduce((l, n, p) => n ? l : [...l, p], []);
+  m.length && (a.C.push({step:1, F:m.length, l:() => m.forEach(l => {
+    l = b.i[l].g;
+    c.g.appendChild(l);
+    A.j || xa(l);
+  })}), m.forEach(l => g.push({G:l, U:Number.NaN, M:g.length})));
+  if (g.reduce((l, n) => l || n.M !== n.G, !1)) {
+    let l = g.sort((n, p) => n.G < p.G ? -1 : n.G === p.G ? 0 : 1).map(n => n.M);
+    a.C.push({step:3, F:1, l:() => {
+      for (let n = 0; n < l.length; n++) {
+        if (n != l[n]) {
+          let p = l[n];
+          if (c.g instanceof HTMLElement || c.g instanceof SVGElement) {
+            let t = c.g.childNodes[n], u = c.g.childNodes[p];
+            l.splice(n, 1, n);
+            l = l.map(v => v + (v >= n && v < p ? 1 : 0));
+            c.g.insertBefore(u, t);
+          }
         }
-        Fa.set(c, e);
       }
-      a = Fa.get(c);
-      d.push({event:b, B:c, hash:a});
-    };
+    }});
   }
 }
-var Fa = new WeakMap();
-const sa = {[ea]:1, [fa]:1, [ha]:1, [pa]:10, [ia]:1, [qa]:1, [oa]:10, [la]:1, [ka]:1, [ta]:-100.11, [ua]:-100.33, [12]:0};
-function Ga() {
-  let a = window.location.search.substring(1).split("&"), b = {};
-  for (let c = 0; c < a.length; ++c) {
-    let d = a[c].split("=", 2);
-    b[d[0]] = 1 == d.length ? "" : decodeURIComponent(d[1].replace(/\+/g, " "));
+function ya(a) {
+  if (a.status === 1) {
+    return 0;
   }
+  let b = 0;
+  a.C.forEach(c => b += B[c.step] * c.F);
+  b += B[10] * a.i;
+  b += B[11] * a.j;
+  a.h.forEach(c => b += c.g);
   return b;
 }
-const w = {G:{qa:function(a, b, c) {
-  let d = 1;
-  for (;;) {
-    var e = 0;
-    for (var f = 2; f <= d; f++) {
-      e += Math.pow(b, f - 1);
+function qa(a, b, c) {
+  let d = b.j.reduce((e, f) => {
+    var g;
+    a: {
+      for (g = 0; g < c.j.length; g++) {
+        if (f.key === c.j[g].key) {
+          g = c.j[g].value;
+          break a;
+        }
+      }
+      g = void 0;
     }
-    e = a - e;
-    f = [];
-    for (let h = 1; h <= d; h++) {
-      let g = e % b;
-      f.splice(0, 0, c(g));
-      e -= g;
-      e /= b;
+    g !== f.value && e.push(f);
+    return e;
+  }, []);
+  d.length && a.C.push({step:7, F:d.length, l:() => d.forEach(e => {
+    c.g instanceof HTMLInputElement && (e.key === "value" && (c.g.value = e.value), e.key === "checked" && (c.g.checked = e.value));
+    c.g instanceof HTMLSelectElement && e.key === "value" && (c.g.value = e.value);
+    c.g instanceof HTMLTextAreaElement && e.key === "value" && (c.g.value = e.value);
+  })});
+}
+function ra(a, b, c) {
+  b.B !== c.B && a.C.push({step:4, F:1, l:() => {
+    c.g.textContent = b.B;
+  }});
+}
+function sa(a, b, c) {
+  let d = A.g.get(b.g) ?? [], e = A.g.get(c.g) ?? [], f = [], g = [], k = [];
+  e.forEach((h, m) => {
+    let l = !0;
+    d.forEach((n, p) => {
+      h.event === n.event && (h.hash !== void 0 || n.hash !== void 0 ? h.hash === n.hash && (l = !1, h.l !== n.l && k.push({ya:m, xa:p})) : h.l === n.l && (l = !1));
+    });
+    l && f.push(m);
+  });
+  d.forEach((h, m) => {
+    let l = !0;
+    e.forEach(n => {
+      n.event === h.event && (n.hash !== void 0 || h.hash !== void 0 ? n.hash === h.hash && (l = !1) : n.l === h.l && (l = !1));
+    });
+    l && g.push(m);
+  });
+  f.length && a.C.push({step:9, F:f.length, l:() => {
+    f.forEach(h => c.g.removeEventListener(e[h].event, e[h].l));
+    f.sort((h, m) => h < m ? 1 : m < h ? -1 : 0).forEach(h => e.splice(h, 1));
+    A.g.set(c.g, e);
+  }});
+  g.length && a.C.push({step:8, F:g.length, l:() => {
+    g.forEach(h => {
+      c.g.addEventListener(d[h].event, d[h].l);
+      e.push({event:d[h].event, l:d[h].l, hash:d[h].hash});
+      A.g.set(c.g, e);
+    });
+  }});
+  k.length && a.C.push({step:16, F:k.length, l:() => {
+    k.forEach(h => {
+      const m = e[h.ya];
+      h = d[h.xa];
+      c.g.removeEventListener(m.event, m.l);
+      c.g.addEventListener(h.event, h.l);
+      m.l = h.l;
+    });
+    A.g.set(c.g, e);
+  }});
+}
+function za(a) {
+  a.h.forEach(b => {
+    za(b);
+  });
+  a.C.forEach(b => {
+    try {
+      b.l();
+    } catch (c) {
+      console.error(b.step, c);
     }
-    if (e) {
-      d++;
-    } else {
-      return f.join("");
+  });
+}
+class wa {
+  constructor(a, b, c) {
+    this.C = [];
+    this.status = 2;
+    this.h = [];
+    this.g = Number.NaN;
+    this.j = this.i = 0;
+    this.C.push({step:15, l:() => {
+      const d = a.h, e = b.h;
+      d && e && ma.set(d, e);
+    }, F:1});
+    if (c.R !== !0) {
+      if (a.id) {
+        if (a.id === b.id) {
+          if (this.status = 4, ma.set(a.h, b.h), (c.Ja ?? []).includes(a.id)) {
+            return;
+          }
+        } else {
+          this.status = 1;
+          return;
+        }
+      } else if (a.lid) {
+        if (a.lid === b.lid) {
+          this.status = 4, ma.set(a.h, b.h);
+        } else {
+          this.status = 1;
+          return;
+        }
+      } else if (b.id || b.lid) {
+        this.status = 1;
+        return;
+      }
+      pa(this, a, b, c);
+      if (this.status === 1) {
+        return;
+      }
     }
+    ta(this, a, b, {...c, R:!0});
+    this.status !== 1 && (va(this, a, b, {...c, R:!1}), this.g = ya(this));
   }
-}, na:function(a, b) {
-  return w.G.oa(new Date(a), b);
-}, oa:function(a, b) {
-  const c = a.getDate().toString().padStart(2, "0"), d = (a.getMonth() + 1).toString().padStart(2, "0"), e = a.getFullYear(), f = a.getHours().toString().padStart(2, "0"), h = a.getMinutes().toString().padStart(2, "0");
-  a = a.getSeconds().toString().padStart(2, "0");
-  return b ? `${c}/${d}/${e} ${f}:${h}:${a}` : `${d}/${c}/${e} ${f}:${h}:${a}`;
-}, Ha:function(a) {
-  const [b, c, d] = a.split("-").map(e => parseInt(e, 10));
-  return new Date(b, c - 1, d);
-}, xa:function(a, b) {
-  const [c, d, e] = a.split("-").map(f => parseInt(f, 10));
-  return w.G.oa(new Date(c, d - 1, e), b);
-}, ya:function(a) {
-  return w.G.wa(new Date(a));
-}, wa:function(a) {
-  return `${a.getFullYear()}-${(a.getMonth() + 1).toString().padStart(2, "0")}-${a.getDate().toString().padStart(2, "0")}`;
-}, Ka:function(a) {
-  return w.G.qa(a, 26, b => String.fromCharCode(65 + b));
-}, La:function(a) {
-  return w.G.qa(a, 64, b => 10 > b ? String.fromCharCode(48 + b - 0) : 36 > b ? String.fromCharCode(65 + b - 10) : 62 > b ? String.fromCharCode(97 + b - 36) : 62 === b ? "-" : "+");
-}}, debug:{Ma:function() {
-  let a = new Date();
-  return a.getHours().toString().padStart(2, "0") + ":" + a.getMinutes().toString().padStart(2, "0") + ":" + a.getSeconds().toString().padStart(2, "0");
-}}, Aa:function(a) {
-  return Math.floor((new Date(a) - a) / 6E4);
-}, J:{Ea:function(a = 200, b = 440, c = 1, d = "sine") {
-  const e = new (window.AudioContext || window.webkitAudioContext)(), f = e.createOscillator(), h = e.createGain();
-  f.connect(h);
-  h.connect(e.destination);
-  h.gain.value = c;
-  f.frequency.value = b;
-  f.type = d;
-  f.start(e.currentTime);
-  f.stop(e.currentTime + 0.001 * a);
-}, pa:function(a = 200, b = 400, c = 1, d = "square") {
-  const e = new (window.AudioContext || window.webkitAudioContext)(), f = e.createOscillator(), h = e.createGain();
-  f.connect(h);
-  h.connect(e.destination);
-  h.gain.value = c;
-  f.frequency.value = b;
-  f.type = d;
-  f.start();
-  f.stop(e.currentTime + a / 1000);
-}, Na:() => w.J.pa(100, 400, 0.2, "square"), za:() => w.J.pa(200, 300, 0.3, "sawtooth"), T:function() {
+}
+function xa(a) {
+  let b = ea.get(a);
+  b && (b(a), ea.delete(a));
+  a.childNodes.forEach(xa);
+}
+function ua(a, b, c) {
+  let d = typeof a !== "string" ? a : C("div", {l:f => f.innerHTML = a});
+  b instanceof ShadowRoot && d instanceof HTMLElement && d.attributes.length && (d = C("div", {l:f => f.appendChild(d)}));
+  let e = ia(d);
+  b = ia(b);
+  za(new wa(e, b, c));
+}
+;async function Aa(a, b, c) {
+  a = document.createElement(a);
+  c && c.appendChild(a);
+  c = new Ba(a);
+  b && await b(c);
+  return c;
+}
+var Ca = new WeakMap();
+async function Da(a, b, c, d = null) {
+  d === null && (d = 20);
+  let e = await Aa("div");
+  Ca.has(a) || Ca.set(a, [0]);
+  {
+    var f = Ca.get(a);
+    d = 1000 / d;
+    let g = Date.now();
+    g - (f?.[0] ?? 0) > d ? (f[0] = g, f = !0) : f = !1;
+  }
+  f && (await b(e), ua(e.i, a, c ?? {}));
+}
+function E(a, b, c) {
+  let d = [];
+  c(e => d.push(e));
+  a.data.push({pa:b, rules:d.join("")});
+}
+function Ea(a, b) {
+  C("style", {l:c => {
+    b.e.appendChild(c);
+    c.innerText = a.data.map(d => `${d.pa} { ${d.rules} }`).join(" ");
+  }});
+}
+class Fa {
+  constructor() {
+    this.data = [];
+  }
+  add(a, b) {
+    this.data.push({pa:a, rules:b});
+  }
+}
+function Ga(a) {
+  return new Proxy(a, {get:(b, c) => c === "addEventListener" ? (d, e, f) => {
+    A.i(b, d, e);
+    return b.addEventListener(d, e, f);
+  } : typeof b[c] === "function" ? b[c].bind(b) : b[c], set:(b, c, d) => {
+    typeof c === "string" && c.toLowerCase().startsWith("on") ? (c = c.substring(2), A.i(b, c, d), b.addEventListener(c, d)) : b[c] = d;
+    return !0;
+  }});
+}
+async function F(a, b, c) {
+  return Aa(b, c, a.h);
+}
+function Ha(a, b) {
+  let c = new Fa();
+  b(c);
+  Ea(c, a);
+}
+async function Ia(a) {
+  var b = await F(a, "div");
+  b.e.style.height = b.e.style.width = "100%";
+  if ("attachShadow" in a.h) {
+    return b = b.i.attachShadow({mode:"open"}), r.set(a.h, b), new Ba(b);
+  }
+  throw Error("attachShadow");
+}
+class Ba {
+  constructor(a) {
+    this.h = a;
+    this.j = null;
+  }
+  get e() {
+    this.o || (this.o = Ga(this.h));
+    return this.o;
+  }
+  get g() {
+    this.j || (this.j = new da(this.h));
+    return this.j;
+  }
+  get i() {
+    return this.h;
+  }
+}
+;function Ja() {
+  const a = new (window.AudioContext || window.webkitAudioContext)(), b = a.createOscillator(), c = a.createGain();
+  b.connect(c);
+  c.connect(a.destination);
+  c.gain.value = 0.3;
+  b.frequency.value = 300;
+  b.type = "sawtooth";
+  b.start();
+  b.stop(a.currentTime + .2);
+}
+function G() {
   const a = new (window.AudioContext || window.webkitAudioContext)(), b = a.createOscillator();
   b.type = "sine";
   b.frequency.setValueAtTime(440, a.currentTime);
@@ -352,322 +561,161 @@ const w = {G:{qa:function(a, b, c) {
   c.connect(a.destination);
   b.start(a.currentTime);
   b.stop(a.currentTime + 0.3);
-}}};
-var z = new Ea(), Ha = new WeakMap(), u = new WeakMap();
-class Ia {
-  constructor(a) {
-    this.g = a;
-  }
-  get h() {
-    return this.g;
-  }
-  get button() {
-    return this.g;
-  }
-  get style() {
-    return this.g;
-  }
-  get l() {
-    return this.g;
-  }
-  get j() {
-    return this.g;
-  }
-  get a() {
-    return this.g;
-  }
-  get label() {
-    return this.g;
-  }
 }
-function xa(a, b) {
-  a = document.createElement(a);
-  b && b(a);
-  return a;
-}
-async function A(a, b, c) {
-  a = document.createElement(a);
-  c && c.appendChild(a);
-  c = new Ja(a);
-  b && await b(c);
-  return c;
-}
-async function Ka(a, b) {
-  let c = await A(b && "tagName" in b ? b.tagName.toLocaleLowerCase() : "div");
-  c.e.innerHTML = a;
-  b.appendChild(c.j);
-  return c;
-}
-function B(a, b, c) {
-  let d = [];
-  c(e => d.push(e));
-  a.data.push({sa:b, rules:d.join("")});
-}
-function La(a, b) {
-  xa("style", c => {
-    b.e.appendChild(c);
-    c.innerText = a.data.map(d => `${d.sa} { ${d.rules} }`).join(" ");
-  });
-}
-class Ma {
-  constructor() {
-    this.data = [];
-  }
-  add(a, b) {
-    this.data.push({sa:a, rules:b});
-  }
-}
-function Na(a) {
-  return new Proxy(a, {get:(b, c) => "addEventListener" === c ? (d, e, f) => {
-    z.h(b, d, e);
-    return b.addEventListener(d, e, f);
-  } : "function" === typeof b[c] ? b[c].bind(b) : b[c], set:(b, c, d) => {
-    "string" === typeof c && c.toLowerCase().startsWith("on") ? (c = c.substring(2), z.h(b, c, d), b.addEventListener(c, d)) : b[c] = d;
-    return !0;
-  }});
-}
-async function C(a, b, c) {
-  return A(b, c, a.h);
-}
-async function Oa(a, b) {
-  return Ka(b, a.h);
-}
-function Pa(a, b) {
-  let c = new Ma();
-  b(c);
-  La(c, a);
-}
-async function Qa(a) {
-  var b = await C(a, "div");
-  if ("attachShadow" in a.h) {
-    return b = b.h.attachShadow({mode:"open"}), u.set(a.h, b), new Ja(b);
-  }
-  throw Error("attachShadow");
-}
-class Ja {
-  constructor(a) {
-    this.h = a;
-    this.l = Na(a);
-    this.g = new Ia(a);
-  }
-  get e() {
-    return this.l;
-  }
-  get j() {
-    return this.h;
-  }
-}
-async function Ra(a, b, c) {
-  b = 1000 / b;
-  let d = Date.now();
-  d - a[0] > b && (await c(), a[0] = d);
-}
-async function Sa(a, b) {
-  var c = void 0;
-  c = 20;
-  let d = await A("div");
-  Ha.has(a) || Ha.set(a, [0]);
-  let e = Ha.get(a);
-  Ra(e, c, async() => {
-    await b(d);
-    wa(d.j, a, z);
-  });
-}
-async function Ta(a, b) {
-  A("div", async c => {
-    await b(c);
-    wa(c.j, a, z);
-  });
-}
-function Ua(a, b) {
-  let c = a;
-  do {
-    c.style.height = "100%";
-    c.style.width = "100%";
-    c.style.margin = 0;
-    if (!b || "HTML" === c.tagName) {
-      break;
-    }
-    c = c.parentNode;
-  } while (c);
-  !b && a instanceof HTMLElement && (b = () => a.style.height = `${0.5 * a.offsetWidth}px`, window.addEventListener("resize", b), b());
-}
-;function D(a) {
-  return new Promise((b, c) => {
-    a.onsuccess = () => b(a.result);
-    a.onerror = () => c(a.error);
-  });
-}
-function Va(a, b) {
-  a = indexedDB.open(a);
-  a.onupgradeneeded = d => {
-    d = d.target.result;
-    d.objectStoreNames.contains(b) || d.createObjectStore(b);
-  };
-  const c = D(a);
-  return (d, e) => c.then(f => {
-    f = f.transaction(b, d).objectStore(b);
-    return e(f);
-  });
-}
-let Wa;
-function E() {
-  Wa ||= Va("keyval-store", "keyval");
-  return Wa;
-}
-function F(a, b) {
-  return a("readonly", c => {
-    c = c.openCursor();
-    c.onsuccess = d => {
-      if (d = d.target.result) {
-        b(d), d.continue();
-      }
-    };
-    return D(c);
-  });
-}
-class Xa {
-  constructor(a) {
-    this.g = Va(...a.split("."));
-  }
-  async get(a) {
-    return G.get(a, this.g);
-  }
-  async set(a, b) {
-    return G.set(a, b, this.g);
-  }
-  async P(a) {
-    return G.P(a, this.g);
-  }
-  async clear() {
-    return G.clear(this.g);
-  }
-}
-async function Ya(a) {
-  a.g = [];
-  var b = await indexedDB.databases();
-  for (let c of b) {
-    c.name && (b = await Za(c.name), a.g.push({name:c.name, version:c.version ?? -1, ta:b.ta, keys:b.keys}));
-  }
-  for (let c of a.g) {
-    for (let d of c.keys) {
-      console.log(`db:'${c.name}', v:${c.version}, store:'${d.store}', key:'${d.key}'`);
-    }
-  }
-}
-async function Za(a) {
-  const b = indexedDB.open(a);
-  return new Promise((c, d) => {
-    b.onsuccess = async function() {
-      const e = b.result, f = Array.from(e.objectStoreNames), h = [];
-      for (let g of f) {
-        const m = e.transaction(g, "readwrite").objectStore(g).getAllKeys();
-        await (async() => {
-          let k = await D(m);
-          for (let n of k) {
-            h.push({store:g, key:n});
-          }
-        })();
-      }
-      e.close();
-      c({ta:f, keys:h});
-    };
-    b.onerror = () => d(b.error);
-  });
-}
-class $a {
-  constructor() {
-    this.g = [];
-    Ya(this);
-  }
-  async clear() {
-    const a = await indexedDB.databases();
-    for (let b of a) {
-      b.name && indexedDB.deleteDatabase(b.name);
-    }
-  }
-}
-const G = {get:function(a, b = E()) {
-  return b("readonly", c => D(c.get(a)));
-}, set:function(a, b, c = E()) {
-  return c("readwrite", d => {
-    d = d.put(b, a);
-    return D(d);
-  });
-}, update:function(a, b, c = E()) {
-  return c("readwrite", d => new Promise((e, f) => {
-    const h = d.get(a);
-    h.onsuccess = () => {
-      try {
-        const g = b(h.result, a), m = d.put(g, a);
-        e(D(m));
-      } catch (g) {
-        f(g);
-      }
-    };
-    h.onerror = function() {
-      f(h.error);
-    };
-  }));
-}, P:function(a, b = E()) {
-  return b("readwrite", c => D(c.delete(a)));
-}, clear:function(a = E()) {
-  return a("readwrite", b => D(b.clear()));
-}, Ja:function(a, b = E()) {
-  return b("readonly", c => Promise.all(a.map(d => D(c.get(d)))));
-}, Ga:F, keys:function(a = E()) {
-  const b = [];
-  return F(a, c => b.push(c.key)).then(() => b);
-}, values:function(a = E()) {
-  const b = [];
-  return F(a, c => b.push(c.value)).then(() => b);
-}, entries:function(a = E()) {
-  const b = [];
-  return F(a, c => b.push({key:c.key, value:c.value})).then(() => b);
-}, Fa:Va, O:Xa, Da:$a};
-var H = a => {
+;var I = a => {
   a = a.folder && a.name ? `${a.folder}/${a.name}` : a.folder ? a.folder : a.name;
   a = a.split("/").reduce((b, c) => {
     c && b.push(c);
     return b;
   }, []);
   return a.join("/");
-}, ab = new Map();
-function bb(a, b) {
-  b && ab.clear();
-  if (a && a.name && a.mimeType) {
-    b = a.name.split(".");
-    var c = 1 < b.length ? b[b.length - 1] : "";
-    b = ab.get(c);
-    b || (b = new Map(), ab.set(c, b));
-    c = b.get(a.mimeType);
-    c || (c = [], b.set(a.mimeType, c));
-    c.push(a);
-  }
+};
+function Ka(a, b, c) {
+  return a.map(d => La(d, b, c));
 }
-;var I = G, J = w;
-function cb(a, b, c) {
-  return a.map(d => db(d, b, c));
-}
-function db(a, b, c) {
-  a.size && "string" === typeof a.size && (a.size = parseInt(a.size, 10));
+function La(a, b, c) {
+  a.size && typeof a.size === "string" && (a.size = parseInt(a.size, 10));
   a.folder = c;
   a.g = b;
-  a.isfile = "application/vnd.google-apps.folder" == a.mimeType ? !1 : !0;
+  a.isfile = a.mimeType == "application/vnd.google-apps.folder" ? !1 : !0;
   return a;
 }
-async function L(a, b, c, d) {
-  c = "object" === typeof c ? c : new Headers({Authorization:`Bearer ${c}`});
+;const J = new Map(), Ma = J.delete.bind(J), Na = new Map(), Oa = new Map(), Pa = new BroadcastChannel("ib");
+Pa.onmessage = a => {
+  a = a.data;
+  a.m === 1 && (J.get(a.n)?.close(), Ma(a.n));
+};
+J.delete = a => {
+  Pa.postMessage({m:1, n:a});
+  return Ma(a);
+};
+function Qa(a, b) {
+  if (!b) {
+    return Ra(a);
+  }
+  var c = () => Ra(a, b);
+  c = (Oa.get(a) || Promise.resolve()).then(c, c);
+  Oa.set(a, c.then(() => {
+  }, () => {
+  }));
+  return c;
+}
+async function Ra(a, b) {
+  var c = J.get(a);
+  if (c && !b) {
+    return c;
+  }
+  if ((c = Na.get(a)) && !b) {
+    return c;
+  }
+  let d;
+  b && (c = await Qa(a), d = c.version + 1, c.close(), J.delete(a));
+  c = new Promise((f, g) => {
+    let k = !1, h = !1;
+    setTimeout(() => {
+      k || g(Error(`indexedDB timeout: bloqueado: ${h ? "essa aba" : "outra"} (${a})`));
+    }, 100);
+    const m = indexedDB.open(a, d);
+    m.onsuccess = l => {
+      k = !0;
+      l = l.target.result;
+      J.set(a, l);
+      f(l);
+    };
+    m.onerror = l => {
+      k = !0;
+      g(l.target.error);
+    };
+    m.onupgradeneeded = l => {
+      k = !0;
+      l = l.target.result;
+      b && b(l);
+    };
+    m.onblocked = () => {
+      h = !0;
+    };
+  });
+  Na.set(a, c);
+  const e = () => {
+    Na.delete(a);
+  };
+  c.then(e, e);
+  return c;
+}
+async function Sa(a, b) {
+  let c = await Qa(a);
+  c.objectStoreNames.contains(b) || (c = await Qa(a, d => {
+    d.objectStoreNames.contains(b) || d.createObjectStore(b);
+  }));
+  return c;
+}
+async function K(a, b, c, ...d) {
+  let e = a.j;
+  e && e.objectStoreNames.contains(a.h) || (e = await Sa(a.i, a.h));
+  const f = e.transaction([a.h], b).objectStore(a.h)[c](...d);
+  return new Promise((g, k) => {
+    f.onsuccess = h => {
+      g(h.target.result);
+    };
+    f.onerror = h => {
+      k(h.target.error);
+    };
+  });
+}
+class Ta {
+  constructor(a) {
+    const [b, c] = a.split(".");
+    this.i = b;
+    this.h = c;
+  }
+  get j() {
+    return J.get(this.i);
+  }
+  async init() {
+    return await Sa(this.i, this.h);
+  }
+  async get(a) {
+    return await K(this, "readonly", "get", a);
+  }
+  async set(a, b) {
+    await K(this, "readwrite", "put", b, a);
+  }
+  async g(a) {
+    await K(this, "readwrite", "delete", a);
+  }
+  async clear() {
+    await K(this, "readwrite", "clear");
+  }
+}
+class Ua {
+  async init() {
+    await this.h.init();
+  }
+  async get(a) {
+    return this.h.get(a);
+  }
+  async set(a, b) {
+    return this.h.set(a, b);
+  }
+  async g(a) {
+    return this.h.g(a);
+  }
+  async clear() {
+    return this.h.clear();
+  }
+}
+;async function L(a, b, c, d) {
+  c = typeof c === "object" ? c : new Headers({Authorization:`Bearer ${c}`});
   b = {method:b, headers:c};
   d && (b.body = d);
   try {
     const e = await fetch(a, b);
     if (!e.ok) {
       let f = await e.json();
-      f.error && f.error.errors && f.error.errors.forEach(h => {
-        console.log("Erro:", h.message);
-        console.log(h.reason);
-        switch(h.reason) {
+      f.error && f.error.errors && f.error.errors.forEach(g => {
+        console.log("Erro:", g.message);
+        console.log(g.reason);
+        switch(g.reason) {
           case "quotaExceeded":
             console.log("Voc\u00ea excedeu uma quota do Google Drive.");
             break;
@@ -687,26 +735,69 @@ async function L(a, b, c, d) {
     return null;
   }
 }
-async function eb(a, b, c = "") {
-  let d = `https://www.googleapis.com/drive/v3/files?q=${encodeURIComponent(`('${b}' in parents)`)}&fields=${encodeURIComponent("files(id,name,modifiedTime,size,mimeType,trashed)")}`;
-  a = await L(d, "GET", a);
+async function Va(a, b, c = "") {
+  var d = "nextPageToken,files(id,name,modifiedTime,size,mimeType,trashed)";
+  d = `https://www.googleapis.com/drive/v3/files?q=${encodeURIComponent(`('${b}' in parents and trashed = false)`)}&fields=${encodeURIComponent(d)}`;
+  let e = [];
+  var f = null;
+  do {
+    f = d + (f ? `&pageToken=${encodeURIComponent(f)}` : "");
+    f = await L(f, "GET", a);
+    if (!f) {
+      break;
+    }
+    f = await f.json();
+    let g = f.files;
+    g && e.push(...Ka(g, b, c));
+    f = f.nextPageToken;
+  } while (f);
+  return e;
+}
+async function Wa(a) {
+  let b = `https://www.googleapis.com/drive/v3/files?q=${encodeURIComponent("(trashed = true)")}&fields=${encodeURIComponent("files(id,name,modifiedTime,size,mimeType,trashed)")}`;
+  a = await L(b, "GET", a);
   if (!a) {
     return [];
   }
   a = (await a.json()).files;
-  return cb(a, b, c);
+  return Ka(a, "", "");
 }
-async function fb(a, b, c = null, d = null, e = null, f = null, h = null) {
-  const g = {name:b};
-  e && (g.mimeType = e);
-  if (null !== d !== (null !== c)) {
+async function Xa(a, b) {
+  a = await L(`https://www.googleapis.com/drive/v3/files/${b}?alt=media`, "GET", a);
+  if (!a || !a.ok) {
+    throw Error("Erro na API do Google Drive:" + a?.status);
+  }
+  return await a.blob();
+}
+async function Ya(a, b, c = "", d = -1) {
+  const e = [];
+  for (b = [[b, c, 0]]; b.length > 0;) {
+    const [g, k, h] = b.shift();
+    c = e;
+    var f = await Va(a, g, k);
+    for (const m of f) {
+      if (f = `${k}/${m.name}`, m.mimeType === "application/vnd.google-apps.folder") {
+        if (d === -1 || h + 1 <= d) {
+          b.push([m.id, f, h + 1]), c.push(m);
+        }
+      } else {
+        c.push(m);
+      }
+    }
+  }
+  return e;
+}
+async function Za(a, b, c = null, d = null, e = null, f = null, g = null) {
+  const k = {name:b};
+  e && (k.mimeType = e);
+  if (d !== null !== (c !== null)) {
     throw Error("inconsist\u00eancia par\u00e2metros");
   }
-  c && (g.parents = [c]);
-  f && (g.modifiedTime = f);
+  c && (k.parents = [c]);
+  f && (k.modifiedTime = f);
   e = new FormData();
-  e.append("metadata", new Blob([JSON.stringify(g)], {type:"application/json"}));
-  h && e.append("file", h, b);
+  e.append("metadata", new Blob([JSON.stringify(k)], {type:"application/json"}));
+  g && e.append("file", g, b);
   a = await L("https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,name,modifiedTime,size,mimeType,trashed", "POST", a, e);
   if (!a) {
     throw Error("Erro ao criar arquivo:");
@@ -715,40 +806,12 @@ async function fb(a, b, c = null, d = null, e = null, f = null, h = null) {
     throw Error("Erro ao atualizar arquivo:");
   }
   a = await a.json();
-  return db(a, c ?? "root", d ?? "");
+  return La(a, c ?? "root", d ?? "");
 }
-async function gb(a, b, c = "", d = -1) {
-  const e = [];
-  for (b = [[b, c, 0]]; 0 < b.length;) {
-    const [h, g, m] = b.shift();
-    c = e;
-    var f = await eb(a, h, g);
-    for (const k of f) {
-      if (f = `${g}/${k.name}`, "application/vnd.google-apps.folder" === k.mimeType) {
-        if (-1 === d || m + 1 <= d) {
-          b.push([k.id, f, m + 1]), c.push(k);
-        }
-      } else {
-        c.push(k);
-      }
-    }
-  }
-  return e;
-}
-async function hb(a, b) {
-  a = await L(`https://www.googleapis.com/drive/v3/files/${b}?alt=media`, "GET", a);
-  if (!a || !a.ok) {
-    throw Error("Erro na API do Google Drive:" + a?.status);
-  }
-  return await a.blob();
-}
-async function ib(a, b, c = null, d = null) {
-  return fb(a, b, c, d, "application/vnd.google-apps.folder");
-}
-async function jb(a, b) {
+async function $a(a, b) {
   await L(`https://www.googleapis.com/drive/v3/files/${b}`, "DELETE", a);
 }
-async function kb(a, b, c, d) {
+async function ab(a, b, c, d) {
   b = `https://www.googleapis.com/upload/drive/v3/files/${b}?uploadType=multipart${"&fields=id,name,modifiedTime,size,mimeType,trashed"}`;
   d = {modifiedTime:d};
   const e = new FormData();
@@ -763,85 +826,36 @@ async function kb(a, b, c, d) {
   }
   return await a.json();
 }
-;async function lb(a) {
-  "file" === a.handle.kind && (a.g = await a.handle.getFile(), a.size = a.g.size, a.mimeType = a.g.type, a.modifiedTime = w.G.na(a.g.lastModified, !1));
+async function bb(a, b, c = null, d = null) {
+  return Za(a, b, c, d, "application/vnd.google-apps.folder");
 }
-class mb {
-  constructor(a, b) {
-    this.folder = a;
-    this.name = b.name;
-    this.handle = b;
-    "file" === b.kind ? this.isfile = !0 : "directory" === b.kind && (this.isfile = !1);
+async function cb(a, b, c, d = null) {
+  b = `https://www.googleapis.com/drive/v3/files?q=${encodeURIComponent(`name = '${b.replace(/\\/g, "\\\\").replace(/'/g, "\\'")}' and '${c}' in parents and mimeType = '${"application/vnd.google-apps.folder"}' and trashed = false`)}&fields=${encodeURIComponent("files(id,name,modifiedTime,size,mimeType,trashed)")}&pageSize=10`;
+  a = await L(b, "GET", a);
+  if (!a || !a.ok) {
+    return null;
   }
-  async update(a) {
-    if ("file" === this.handle.kind) {
-      this.handle = await nb(await this.handle, a), await lb(this);
-    } else {
-      throw Error("invalid type");
-    }
-  }
+  a = (await a.json()).files ?? [];
+  return a.length ? Ka(a, c, d ?? "")[0] : null;
 }
-async function ob(a, b) {
+async function db(a, b) {
+  return (a = await L(`https://www.googleapis.com/drive/v3/files/${b}?fields=trashed`, "GET", a)) && a.ok ? !!(await a.json()).trashed : !0;
+}
+;async function eb(a, b) {
   return a.getDirectoryHandle(b, {create:!0});
 }
-async function pb(a, b) {
+async function fb(a, b) {
   try {
     return await a.getDirectoryHandle(b, {create:!1});
   } catch (c) {
     return null;
   }
 }
-async function nb(a, b) {
-  let c = await a.createWritable();
-  await c.write(b);
-  await c.close();
-  return a;
-}
-async function qb(a, b) {
-  console.log(b);
-  let c = b.split("/");
-  console.log(c);
-  for (let d of c) {
-    if (d && (a = await pb(a, d), !a)) {
-      throw Error("n\u00e3o achado diret\u00f3rio [" + d + "] de " + b);
-    }
-  }
-  return a;
-}
-async function rb(a, b) {
-  const c = await a.getDirectoryHandle(b);
-  for await (const d of c.values()) {
-    "file" === d.kind ? await c.removeEntry(d.name) : "directory" === d.kind && await rb(c, d.name);
-  }
-  await a.removeEntry(b, {recursive:!0});
-}
-async function sb(a, b = "", c = !0) {
-  let d = [];
-  for await (const f of a.values()) {
-    var e = f;
-    a = new mb(b, e);
-    if ("file" === e.kind) {
-      a.isfile = !0, await lb(a), d.push(a);
-    } else if ("directory" === e.kind) {
-      a.isfile = !1;
-      e = await sb(e, b ? `${b}/${e.name}` : e.name);
-      if (c) {
-        for (let h of e) {
-          d.push(h);
-        }
-      } else {
-        a.s = e;
-      }
-      d.push(a);
-    }
-  }
-  return d;
-}
-async function tb(a = null) {
+async function gb(a = null) {
   let b = {};
-  if (null !== a) {
+  if (a !== null) {
     let c = "desktop documents downloads music pictures videos".split(" ");
-    "FileSystemDirectoryHandle" === (a?.constructor.name ?? "") || c.includes(a) ? b.startIn = a : "string" === typeof a && (b.id = a);
+    (a?.constructor.name ?? "") === "FileSystemDirectoryHandle" || c.includes(a) ? b.startIn = a : typeof a === "string" && (b.id = a);
   }
   try {
     return await window.showDirectoryPicker(b);
@@ -849,18 +863,17 @@ async function tb(a = null) {
     return null;
   }
 }
-async function ub(a) {
+async function hb(a, b) {
   try {
-    return "granted" === await a.queryPermission() || "granted" === await a.requestPermission();
-  } catch (b) {
+    return await a.queryPermission() === "granted" ? !0 : b ? !1 : await a.requestPermission() === "granted";
+  } catch (c) {
     return !1;
   }
 }
-var vb = mb;
-async function wb(a, b, c, d) {
+async function ib(a, b, c, d) {
   b = b.split("/");
   for (let e of b) {
-    e && (a = await ob(a, e));
+    e && (a = await eb(a, e));
   }
   a = await a.getFileHandle(c, {create:!0});
   c = await a.createWritable();
@@ -868,48 +881,209 @@ async function wb(a, b, c, d) {
   await c.close();
   return a;
 }
-async function xb(a, b, c) {
-  a = await qb(a, b);
+async function jb(a) {
+  let b = a.Fa;
+  !b && a.sa && a.name ? b = await a.sa.getFileHandle(a.name, {create:a.create}) : !b && a.ma && (b = a.ma);
+  if (!b || b.kind !== "file") {
+    throw Error("");
+  }
+  let c = await b.createWritable();
+  a.data && await c.write(a.data);
+  await c.close();
+  return b;
+}
+async function kb(a, b) {
+  let c = b.split("/");
+  for (let d of c) {
+    if (d && (a = await fb(a, d), !a)) {
+      throw Error("n\u00e3o achado diret\u00f3rio [" + d + "] de " + b);
+    }
+  }
+  return a;
+}
+async function lb(a, b, c) {
+  a = await kb(a, b);
   a.removeEntry(c);
 }
-async function yb(a, b) {
+async function mb(a, b) {
+  const c = await a.getDirectoryHandle(b);
+  for await (const d of c.values()) {
+    d.kind === "file" ? await c.removeEntry(d.name) : d.kind === "directory" && await mb(c, d.name);
+  }
+  await a.removeEntry(b, {recursive:!0});
+}
+async function nb(a, b) {
   b = b.split("/");
   let c = b.pop();
-  b.length && (a = await qb(a, b.join("/")));
-  await rb(a, c);
+  b.length && (a = await kb(a, b.join("/")));
+  await mb(a, c);
 }
-var zb = {la:function(a, b) {
+function ob(a, b) {
   a = a.replace(/\/$/, "");
   b = b.replace(/\/$/, "");
-  return b.startsWith(a) ? b === a ? !1 : "/" === b[a.length] : !1;
-}};
-const M = new I.O("fileApp.data");
-async function Ab(a, b = !1) {
-  b || null === a.g ? (await a.l(), a.g && a.files.length && await M.set(a.g, a.files)) : (b = await M.get(a.g), a.files = b ? b : []);
+  return b.startsWith(a) ? b === a ? !1 : b[a.length] === "/" : !1;
 }
-class Bb {
-  constructor() {
+;async function pb(a, b) {
+  a = new qb(a, b);
+  await rb(a);
+  return a;
+}
+async function rb(a) {
+  a.handle.kind === "file" && (a.g = await a.handle.getFile(), a.size = a.g.size, a.mimeType = a.g.type, a.modifiedTime = w(a.g.lastModified, !1));
+}
+class qb {
+  constructor(a, b) {
+    this.folder = a;
+    this.name = b.name;
+    this.handle = b;
+    b.kind === "file" ? this.isfile = !0 : b.kind === "directory" && (this.isfile = !1);
+  }
+}
+async function sb(a, b = !0, c = "") {
+  let d = [];
+  if (!a) {
+    return d;
+  }
+  const e = [];
+  for await (const g of a.values()) {
+    var f = g;
+    a = new qb(c, f);
+    if (f.kind === "file") {
+      a.isfile = !0, e.push(a), d.push(a);
+    } else if (f.kind === "directory") {
+      a.isfile = !1;
+      f = await sb(f, b, c ? `${c}/${f.name}` : f.name);
+      if (b) {
+        for (let k of f) {
+          d.push(k);
+        }
+      } else {
+        a.v = f;
+      }
+      d.push(a);
+    }
+  }
+  for (b = 0; b < e.length; b += 50) {
+    await Promise.all(e.slice(b, b + 50).map(g => rb(g)));
+  }
+  return d;
+}
+;let tb;
+function ub() {
+  tb ||= new Map();
+  return tb;
+}
+function vb(a, b) {
+  b && ub().clear();
+  if (a && a.name && a.mimeType) {
+    b = a.name.split(".");
+    var c = b.length > 1 ? b[b.length - 1] : "";
+    b = ub().get(c);
+    b || (b = new Map(), ub().set(c, b));
+    c = b.get(a.mimeType);
+    c || (c = [], b.set(a.mimeType, c));
+    c.push(a);
+  }
+}
+;async function wb() {
+  return new Promise(a => setTimeout(a, 100));
+}
+;function xb(a, b) {
+  a.addEventListener("dblclick", c => {
+    c.target === a && b.requestFullscreen();
+  });
+  window.addEventListener("fullscreenchange", () => {
+  });
+}
+;function M(a) {
+  Object.fromEntries(Object.entries(a).map(([b, c]) => [c, b]));
+}
+M({arc:1, arcTo:2, bezierCurveTo:3, closePath:4, ellipse:5, lineTo:6, moveTo:7, quadraticCurveTo:8, rect:9, roundRect:10, addPath:11, clearRect:12, fillRect:13, strokeRect:14, getTransform:15, resetTransform:16, rotate:17, scale:18, setTransform:19, transform:20, translate:21, beginPath:22, clip:23, fill:24, isPointInPath:25, isPointInStroke:26, stroke:27, lineCap:28, lineDashOffset:29, lineJoin:30, lineWidth:31, miterLimit:32, getLineDash:33, setLineDash:34, drawImage:35, createImageData:36, getImageData:37, 
+putImageData:38, isContextLost:39, reset:40, restore:41, save:42, fillStyle:43, strokeStyle:44, createConicGradient:45, createLinearGradient:46, createPattern:47, createRadialGradient:48, filter:49, globalAlpha:50, globalCompositeOperation:51, imageSmoothingEnabled:52, imageSmoothingQuality:53, getContextAttributes:54, shadowBlur:55, shadowColor:56, shadowOffsetX:57, shadowOffsetY:58, fillText:59, measureText:60, strokeText:61, direction:62, font:63, fontKerning:64, fontStretch:65, fontVariantCaps:66, 
+letterSpacing:67, textAlign:68, textBaseline:69, textRendering:70, wordSpacing:71, drawFocusIfNeeded:72, Ma:80, clip_path:81, Ha:82, Pa:83, Ga:84, Oa:85, addColorStop:86, Na:87, Ba:100, Ea:101, za:102, Aa:103, Da:104, Ca:105});
+M({copy:1, "source-over":2, "source-in":3, "source-out":4, "source-atop":5, "destination-over":7, "destination-in":8, "destination-out":9, "destination-atop":10, xor:11, lighter:12, multiply:14, screen:15, overlay:16, darken:17, lighten:18, "color-dodge":19, "color-burn":20, "hard-light":21, "soft-light":22, difference:23, exclusion:24, hue:25, saturation:26, color:27, luminosity:28});
+M({butt:0, round:1, square:2});
+M({miter:0, bevel:1, round:2});
+M({repeat:0, "repeat-x":1, "repeat-y":2, "no-repeat":3});
+M({nonzero:0, evenodd:1});
+const yb = new ArrayBuffer(8);
+new Float64Array(yb);
+new Uint32Array(yb);
+console.log("DEV MODE", !1);
+const zb = new Map(), Ab = new Map(), Bb = new Map();
+function Cb(a, b) {
+  return (a = b.S ? a.get((b.S || "") + "|" + b.key) : void 0) ? a(b) : null;
+}
+async function Db(a) {
+  var b = Cb(Ab, a);
+  if (b) {
+    return {persisted:!0, handle:b};
+  }
+  if (a.qa) {
+    b = a.qa;
+  } else if (a.S) {
+    b = new Ta(a.S), await b.init();
+  } else {
+    if (a.throw) {
+      throw Error("");
+    }
+    return {persisted:!1, handle:null};
+  }
+  a.reload && await b.g(a.key);
+  var c = zb.get(a.S + "|" + a.key);
+  if (!c) {
+    var d = await b.get(a.key);
+    d && typeof d.queryPermission === "function" && (c = d);
+  }
+  d = await hb(c, a.oa);
+  if (!d && a.oa) {
+    return (a = Cb(Bb, a)) ? {persisted:!0, handle:a} : {persisted:!1, handle:null};
+  }
+  if ((c = d ? c : await gb(c || a.key)) && await hb(c, a.oa)) {
+    typeof FileSystemDirectoryHandle !== "undefined" && c instanceof FileSystemDirectoryHandle ? await b.set(a.key, c) : zb.set(a.S + "|" + a.key, c);
+  } else {
+    if (b = Cb(Bb, a)) {
+      return {persisted:!0, handle:b};
+    }
+    if (a.throw) {
+      throw Error("");
+    }
+    return {persisted:!1, handle:null};
+  }
+  return {persisted:d, handle:c};
+}
+;class Eb {
+  constructor(a) {
     this.files = [];
     this.g = null;
+    this.h = a;
   }
-  R() {
+  async reload(a = !1) {
+    if (!a && this.g !== null && (a = await this.h.get(this.g)) && a.length) {
+      this.files = a;
+      return;
+    }
+    await this.B();
+    this.g && (this.files?.length ?? void 0) && await this.h.set(this.g, this.files);
+  }
+  init() {
     return !0;
   }
-  async l() {
+  async B() {
   }
-  async N() {
+  async Z() {
   }
-  async K() {
+  async Y() {
   }
-  async v() {
+  async o() {
   }
-  async A() {
+  async L() {
   }
   async j() {
     return null;
   }
-  async fa() {
-    this.g && await M.P(this.g);
+  async ga() {
+    this.g && await this.h.g(this.g);
   }
 }
 function N(a) {
@@ -923,7 +1097,7 @@ function O(a, b) {
   }
   throw Error("inconsist\u00eancia fileSource");
 }
-async function Cb(a) {
+async function Fb(a) {
   try {
     return await (await fetch(a.ha)).text();
   } catch (b) {
@@ -931,87 +1105,108 @@ async function Cb(a) {
   }
 }
 async function P(a) {
-  if (a.m && 20 > J.Aa(a.ea)) {
-    return a.m;
+  var b;
+  if (b = a.J) {
+    b = a.fa, b = Math.floor((new Date(b) - b) / 6E4) < 20;
   }
-  let b = await Cb(a);
-  return b ? (a.m = b, a.ea = new Date(), b) : "";
+  return b ? a.J : (b = await Fb(a)) ? (a.J = b, a.fa = new Date(), b) : "";
 }
-class Db extends Bb {
-  constructor() {
-    super();
-    this.F = this.ha = "";
-    this.h = new Map();
-    this.D = void 0;
-    this.ea = this.m = null;
+class Gb extends Eb {
+  constructor(a) {
+    super(a);
+    this.P = this.ha = "";
+    this.i = new Map();
+    this.ea = void 0;
+    this.K = !1;
+    this.fa = this.J = null;
   }
-  R(a) {
-    bb(a, null === a);
-    if (null === a) {
-      return this.h = new Map(), !1;
+  init(a) {
+    vb(a, a === null);
+    if (a === null) {
+      return this.i = new Map(), !1;
     }
     let b = O(this, a);
-    if (b.trashed || "application/vnd.google-apps.spreadsheet" === b.mimeType) {
+    if (b.trashed && !this.K || b.mimeType === "application/vnd.google-apps.spreadsheet") {
       return !1;
     }
-    a = H(a).split("/").filter(c => !!c).join("/");
-    b.isfile ? this.h.set(N(b.folder), b.g) : this.h.set(N(a), b.id);
+    a = I(a).split("/").filter(c => !!c).join("/");
+    b.isfile ? this.i.set(N(b.folder), b.g) : this.i.set(N(a), b.id);
     return !0;
   }
-  async l() {
+  async B() {
     try {
-      this.files = await gb(await P(this), this.F, void 0, this.D);
+      this.files = this.K ? await Wa(await P(this)) : await Ya(await P(this), this.P, void 0, this.ea);
     } catch (a) {
       alert("Erro ao acessar o GDRIVE");
     }
   }
-  async K(a) {
+  async Y(a) {
     a = O(this, a);
     let b = await P(this);
-    return hb(b, a.id);
+    return Xa(b, a.id);
   }
-  async v(a) {
+  async o(a) {
     let b = O(this, a);
     a = await P(this);
-    await jb(a, b.id);
+    await $a(a, b.id);
     this.files = this.files.filter(c => c !== b);
-    await M.set(this.g, this.files);
+    this.g && await this.h.set(this.g, this.files);
   }
-  async N(a, b, c) {
+  async Z(a, b, c) {
     var d = await P(this);
     if (b) {
-      return d = O(this, b), a = (new Date(a.modifiedTime)).toISOString(), b = await P(this), c = await kb(b, d.id, c, a), d.modifiedTime = c.modifiedTime, d.size = parseInt(c.size, 10), await M.set(this.g, this.files), d;
+      return d = O(this, b), a = (new Date(a.modifiedTime)).toISOString(), b = await P(this), c = await ab(b, d.id, c, a), d.modifiedTime = c.modifiedTime, d.size = parseInt(c.size, 10), this.g && await this.h.set(this.g, this.files), d;
     }
-    var e = this.F;
+    var e = this.P;
     b = a.folder.split("/");
-    let f = "/", h;
-    for (let g = 0; g < b.length; g++) {
-      if (!b[g]) {
+    let f = "/", g = "/";
+    for (let k = 0; k < b.length; k++) {
+      if (!b[k]) {
         continue;
       }
-      h = f;
-      f = f + "/" + b[g];
-      let m = N(f);
-      this.h.has(m) ? e = this.h.get(m) : (e = await ib(d, b[g], e, h), this.files.push(e), e = e.id);
+      g = f;
+      f = f + "/" + b[k];
+      let h = N(f), m = this.i.get(h);
+      m && await db(d, m) && (this.i.delete(h), this.files = this.files.filter(l => {
+        a: {
+          for (let n of this.files) {
+            if (n === l) {
+              l = n;
+              break a;
+            }
+          }
+          l = null;
+        }
+        return l?.id !== m;
+      }), m = void 0);
+      if (m) {
+        e = m;
+      } else {
+        let l = await cb(d, b[k], e, g);
+        l ||= await bb(d, b[k], e, g);
+        this.files.push(l);
+        e = l.id;
+        this.i.set(h, e);
+      }
     }
-    c = await fb(d, a.name, e, a.folder, a.mimeType, (new Date(a.modifiedTime)).toISOString(), c);
+    c = await Za(d, a.name, e, a.folder, a.mimeType, (new Date(a.modifiedTime)).toISOString(), c);
     this.files.push(c);
-    await M.set(this.g, this.files);
+    this.g && await this.h.set(this.g, this.files);
     return c;
   }
-  async A(a) {
+  async L(a) {
     var b = N(a);
-    b = this.h.get(b);
+    b = this.i.get(b);
     if (!b) {
       throw Error("Caminho n\u00e3o localizado " + a);
     }
     let c = await P(this);
-    await jb(c, b);
-    this.files = this.files.filter(d => !(zb.la(a, H(d)) || H(d) === a));
-    await M.set(this.g, this.files);
+    await $a(c, b);
+    this.files = this.files.filter(d => !(ob(a, I(d)) || I(d) === a));
+    this.g && await this.h.set(this.g, this.files);
   }
 }
-function Eb(a, b) {
+function Hb(a, b) {
   for (let c of a.files) {
     if (c === b) {
       return c;
@@ -1019,419 +1214,419 @@ function Eb(a, b) {
   }
   throw Error("inconsist\u00eancia fileSource " + (b?.folder ?? "_") + "/" + (b?.name ?? "_"));
 }
-class Fb extends Bb {
-  constructor() {
-    super();
+class Ib extends Eb {
+  constructor(a) {
+    super(a);
     this.handle = null;
   }
-  get h() {
+  get i() {
     return (this.g ?? "") + "_handle";
   }
-  async l() {
-    let a = await M.get(this.h);
-    (this.handle = await ub(a) ? a : await tb(a)) && await ub(this.handle) ? (M.set(this.h, this.handle), this.files = await sb(this.handle, "", !0)) : (this.handle = null, this.files = []);
+  async B() {
+    this.files = (this.handle = (await Db({qa:this.h, key:this.i})).handle) ? await sb(this.handle, !0, "") : [];
   }
-  async N(a, b, c) {
+  async Z(a, b, c) {
     if (!this.handle) {
       return null;
     }
     if (b) {
-      return a = Eb(this, b), await a.update(c), await M.set(this.g, this.files), a;
+      return a = Hb(this, b), await jb({ma:a.handle, data:c}), await rb(a), this.g && await this.h.set(this.g, this.files), a;
     }
-    c = await wb(this.handle, a.folder, a.name, c);
-    a = new vb(a.folder, c);
-    await lb(a);
+    c = await ib(this.handle, a.folder, a.name, c);
+    a = await pb(a.folder, c);
     this.files.push(a);
-    await M.set(this.g, this.files);
+    this.g && await this.h.set(this.g, this.files);
     return a;
   }
-  async K(a) {
-    return a ? await Eb(this, a).handle.getFile() : null;
+  async Y(a) {
+    return a ? await Hb(this, a).handle.getFile() : null;
   }
-  async v(a) {
+  async o(a) {
     if (!this.handle) {
       throw Error("no handle");
     }
-    await xb(this.handle, a.folder, a.name);
+    await lb(this.handle, a.folder, a.name);
     this.files = this.files.filter(b => b !== a);
-    await M.set(this.g, this.files);
+    this.g && await this.h.set(this.g, this.files);
   }
-  async A(a) {
+  async L(a) {
     if (!this.handle) {
       throw Error("no handle");
     }
-    await yb(this.handle, a);
-    this.files = this.files.filter(b => !(zb.la(a, H(b)) || H(b) === a));
-    await M.set(this.g, this.files);
+    await nb(this.handle, a);
+    this.files = this.files.filter(b => !(ob(a, I(b)) || I(b) === a));
+    this.g && await this.h.set(this.g, this.files);
   }
   async j() {
     if (!this.g) {
       return !1;
     }
-    let a = await M.get(this.h);
-    if (await ub(a)) {
+    let a = await this.h.get(this.i);
+    if (await hb(a)) {
       return this.handle = a, !0;
     }
-    (this.handle = await tb(a)) && M.set(this.h, this.handle);
+    (this.handle = await gb(a)) && this.h.set(this.i, this.handle);
     return !!this.handle;
   }
-  async fa() {
-    this.g && (await M.P(this.g), await M.P(this.h));
+  async ga() {
+    this.g && (await this.h.g(this.g), await this.h.g(this.i));
   }
 }
-;function Gb(a) {
+;function Jb(a) {
+  a.g = [];
+  a.$ = [];
   a.j = [];
-  a.aa = [];
-  a.v = [];
-  a.l = -1;
-  a.m = [];
-  a.F = [0, 0];
-  a.D = [0, 0];
-  a.s.map(async b => Gb(b));
+  a.h = -1;
+  a.i = [];
+  a.o = [0, 0];
+  a.B = [0, 0];
+  a.v.map(async b => Jb(b));
 }
 function Q(a, b = !1) {
-  return (() => 1 === a.u ? [a] : b && 2 === a.u ? a.s.map(c => Q(c, !0)).flat() : Hb(a).some(c => 5 === a.j[c] || 1 === a.j[c]) ? a.s.map(c => Q(c, !0)).flat(1) : [])();
+  return (() => a.A === 1 ? [a] : b && a.A === 2 ? a.v.map(c => Q(c, !0)).flat() : Kb(a).some(c => a.g[c] === 5 || a.g[c] === 1) ? a.v.map(c => Q(c, !0)).flat(1) : [])();
 }
-function Hb(a) {
-  return a.M.reduce((b, c, d) => {
+function Kb(a) {
+  return a.N.reduce((b, c, d) => {
     b.includes(d) || b.push(d);
     return b;
   }, []);
 }
-function Ib(a, b, c, d = null) {
-  function e(g, m) {
-    for (let k of f) {
-      if ([g, m].includes(k)) {
-        return k;
+function Lb(a, b, c, d = null) {
+  function e(k, h) {
+    for (let m of f) {
+      if ([k, h].includes(m)) {
+        return m;
       }
     }
     return 0;
   }
-  if (1 === a.u) {
-    let g = [0, 0];
-    if (a.o[b] || a.o[c]) {
-      !a.o[b] && a.o[c] ? g[1] = 3 : a.o[b] && !a.o[c] ? g[0] = 3 : g = a.o[b].size === a.o[c].size ? [1, 1] : [2, 2];
+  if (a.A === 1) {
+    let k = [0, 0];
+    if (a.u[b] || a.u[c]) {
+      !a.u[b] && a.u[c] ? k[1] = 3 : a.u[b] && !a.u[c] ? k[0] = 3 : k = a.u[b].size === a.u[c].size ? [1, 1] : [2, 2];
     }
-    d && (0 !== g[0] && d(a.o[b]) && (g[0] = 0), 0 !== g[1] && d(a.o[c]) && (g[1] = 0));
-    return g;
+    d && (k[0] !== 0 && d(a.u[b]) && (k[0] = 0), k[1] !== 0 && d(a.u[c]) && (k[1] = 0));
+    return k;
   }
-  let f = [2, 3, 1, 0], h = [0, 0];
-  a.s.forEach(g => {
-    g = Ib(g, b, c, d);
-    h[b] = e(h[b], g[b]);
-    h[c] = e(h[c], g[c]);
+  let f = [2, 3, 1, 0], g = [0, 0];
+  a.v.forEach(k => {
+    k = Lb(k, b, c, d);
+    g[b] = e(g[b], k[b]);
+    g[c] = e(g[c], k[c]);
   });
-  return h;
+  return g;
 }
 function R(a, b) {
-  return 1 === a.u ? a.o[b]?.size ?? 0 : a.s.reduce((c, d) => R(d, b) + c, 0);
+  return a.A === 1 ? a.u[b]?.size ?? 0 : a.v.reduce((c, d) => R(d, b) + c, 0);
 }
-function Jb(a, b) {
-  return 1 === a.u ? a.o[b] ? 1 : 0 : a.s.reduce((c, d) => Jb(d, b) + c, 0);
+function Mb(a, b) {
+  return a.A === 1 ? a.u[b] ? 1 : 0 : a.v.reduce((c, d) => Mb(d, b) + c, 0);
 }
-function Kb(a, b) {
-  return 1 === a.u ? 0 : (0 < Jb(a, b) ? 1 : 0) + a.s.reduce((c, d) => Kb(d, b) + c, 0);
+function Nb(a, b) {
+  return a.A === 1 ? 0 : (Mb(a, b) > 0 ? 1 : 0) + a.v.reduce((c, d) => Nb(d, b) + c, 0);
 }
 function S(a, b, c) {
   let d = c ? (new Date()).toISOString() : "1970-01-01T00:00:00.000Z";
-  if (1 === a.u) {
-    return a.o[b]?.modifiedTime ?? d;
+  if (a.A === 1) {
+    return a.u[b]?.modifiedTime ?? d;
   }
   let e = new Date(d);
-  2 === a.u && a.s.forEach(f => {
+  a.A === 2 && a.v.forEach(f => {
     if (f = S(f, b, c)) {
-      var h = new Date(f);
-      if (c && h < e || h > e) {
-        d = f, e = h;
+      var g = new Date(f);
+      if (c && g < e || g > e) {
+        d = f, e = g;
       }
     }
   });
   return d;
 }
-function Lb(a, b, c, d) {
+function Ob(a, b, c, d) {
   let e = `${b}/${c.replace("/", "\u2215")}`.split("/"), f = a;
-  e.forEach((h, g) => {
-    if (h) {
-      let m = h.replace("\u2215", "/");
-      g !== e.length - 1 || 2 === d ? (g = f.s.find(k => k.name === h && 2 === k.u), g || (g = new Mb(h, 2, f), g.name = m)) : (g = f.s.find(k => k.name === h && k.u === d), g || (g = new Mb(h, d, f), g.name = m));
-      f = g;
+  e.forEach((g, k) => {
+    if (g) {
+      let h = g.replace("\u2215", "/");
+      k !== e.length - 1 || d === 2 ? (k = f.v.find(m => m.name === g && m.A === 2), k || (k = new Pb(g, 2, f), k.name = h)) : (k = f.v.find(m => m.name === g && m.A === d), k || (k = new Pb(g, d, f), k.name = h));
+      f = k;
     }
   });
   return f;
 }
-class Mb {
+class Pb {
   constructor(a, b, c = null) {
     this.name = a;
-    this.h = c && c.h ? `${c.h}/${a}` : a;
-    this.u = b;
-    this.g = c;
-    this.s = [];
-    this.A = this.h.split("/").reduce((d, e) => d + (e ? 1 : 0), 0);
-    this.o = [];
-    this.M = [];
-    this.j = [];
-    this.aa = [];
+    this.I = c && c.I ? `${c.I}/${a}` : a;
+    this.A = b;
+    this.parent = c;
     this.v = [];
-    this.l = -1;
-    this.m = [];
-    this.F = [];
-    this.D = [];
+    this.depth = this.I.split("/").reduce((d, e) => d + (e ? 1 : 0), 0);
+    this.u = [];
+    this.N = [];
+    this.g = [];
+    this.$ = [];
+    this.j = [];
+    this.h = -1;
+    this.i = [];
+    this.o = [];
+    this.B = [];
     if (c) {
-      if (2 !== c.u) {
+      if (c.A !== 2) {
         throw Error();
       }
-      c.s.push(this);
+      c.v.push(this);
     }
   }
 }
-;const T = {ia:"\ud83d\udcc1", da:"\ud83d\udcc2", ga:"\ud83d\udd39"};
+;const T = {ia:"\ud83d\udcc1", ca:"\ud83d\udcc2", da:"\ud83d\udd39"}, Qb = {ra:""};
 function U(a) {
-  function b(k) {
-    let n = 2 === k.u, l = e.includes(k.h);
-    n && g.push(k);
-    m.reduce((p, q) => {
-      q = (q = k.o[q]) ? h(q) : !0;
-      return p && q;
-    }, !0) || g.push(k);
-    n && l && n && l && k.s.map((p, q) => {
+  function b(m) {
+    let l = m.A === 2, n = e.includes(m.I);
+    l && k.push(m);
+    h.reduce((p, t) => {
+      t = (t = m.u[t]) ? g(t) : !0;
+      return p && t;
+    }, !0) || k.push(m);
+    l && n && l && n && m.v.map((p, t) => {
       b(p);
-      p.l = q;
-      m.forEach(r => {
-        p.M[r] && (k.m[r] = q);
+      p.h = t;
+      h.forEach(u => {
+        p.N[u] && (m.i[u] = t);
       });
-      m.forEach(r => {
-        let v = p.o[r];
-        !v || h && h(v) || k.D[r]++;
+      h.forEach(u => {
+        let v = p.u[u];
+        !v || g && g(v) || m.B[u]++;
       });
     });
   }
-  function c(k, n, l) {
-    k.j[n] = l;
-    k.s.forEach(p => c(p, n, l));
+  function c(m, l, n) {
+    m.g[l] = n;
+    m.v.forEach(p => c(p, l, n));
   }
-  function d(k, n) {
-    let l = 2 === k.u, p = e.includes(k.h), [q, r] = m, v = Ib(k, q, r, f.h);
-    for (let x of m) {
-      if (l ? k.j[x] = n ? p ? 2 : 1 : 5 : k.o[x] && (k.j[x] = 3), n) {
+  function d(m, l) {
+    let n = m.A === 2, p = e.includes(m.I), [t, u] = h, v = Lb(m, t, u, f.h);
+    for (let x of h) {
+      if (n ? m.g[x] = l ? p ? 2 : 1 : 5 : m.u[x] && (m.g[x] = 3), l) {
         var y = v[x];
-        let Xb = 1 === y || 0 === y ? "gray" : 3 === y ? "purple" : 2 === y ? "red" : "purple";
-        y = K => "function" === typeof K ? K(Xb) : K;
-        let Yb = l ? p ? y(T.ia) : y(T.da) : y(T.ga);
-        k.aa[x] = function() {
-          let K = `span class="${f.K.ua}"`;
-          return k.M[x] ? `<${K}>${k.v[x]}</span>${Yb} ${k.name}` : `<${K}>${k.v[x]}</span>`;
+        let dc = y === 1 || y === 0 ? "gray" : y === 3 ? "purple" : y === 2 ? "red" : "purple";
+        y = H => typeof H === "function" ? H(dc) : H;
+        let ec = n ? p ? y(T.ia) : y(T.ca) : y(T.da);
+        m.$[x] = function() {
+          let H = `span class="${Qb.ra}"`;
+          return m.N[x] ? `<${H}>${m.j[x]}</span>${ec} ${m.name}` : `<${H}>${m.j[x]}</span>`;
         }();
       }
     }
-    l && p ? k.s.map(x => d(x, n)) : l && !p && k.s.map(x => d(x, !1));
+    n && p ? m.v.map(x => d(x, l)) : n && !p && m.v.map(x => d(x, !1));
   }
-  let e = a.j, f = a, h = a.h, g = [];
-  a.l.forEach(k => Nb(k, a.m));
-  Gb(a.m);
-  let m = a.A;
-  a.m.s.forEach(k => b(k));
-  m.forEach(k => g.forEach(n => {
-    let l = [], p = n;
-    for (; 1 < p.A;) {
-      var q = n, r = p, v = k;
-      if (1 === r.u) {
-        let y = r.o[v];
-        y && (h && h(y) || r.g.F[v]++);
+  let e = a.i, f = a, g = a.h, k = [];
+  a.j.forEach(m => Rb(m, a.o));
+  Jb(a.o);
+  let h = a.J;
+  a.o.v.forEach(m => b(m));
+  h.forEach(m => k.forEach(l => {
+    let n = [], p = l;
+    for (; p.depth > 1;) {
+      var t = l, u = p, v = m;
+      if (u.A === 1) {
+        let y = u.u[v];
+        y && (g && g(y) || u.parent.o[v]++);
       }
-      q = r.M[v] ? 1 === r.u ? r.g.F[v] === r.g.D[v] ? "\u2514\u2500" : "\u251c\u2500" : r.l < r.g.m[v] ? "\u2502&nbsp" : r.l == r.g.m[v] ? q.A === r.A ? "\u2514\u2500" : "&nbsp&nbsp" : "ab" : r.l < r.g.m[v] ? "\u2502&nbsp" : "&nbsp&nbsp";
-      void 0 === q && (q = "p");
-      l.unshift(q);
-      p = p.g;
+      t = u.N[v] ? u.A === 1 ? u.parent.o[v] === u.parent.B[v] ? "\u2514\u2500" : "\u251c\u2500" : u.h < u.parent.i[v] ? "\u2502&nbsp" : u.h == u.parent.i[v] ? t.depth === u.depth ? "\u2514\u2500" : "&nbsp&nbsp" : "ab" : u.h < u.parent.i[v] ? "\u2502&nbsp" : "&nbsp&nbsp";
+      t === void 0 && (t = "p");
+      n.unshift(t);
+      p = p.parent;
     }
-    n.v[k] = l.join("");
+    l.j[m] = n.join("");
   }));
-  a.m.s.forEach(k => {
-    m.forEach(n => c(k, n, 0));
-    d(k, !0);
+  a.o.v.forEach(m => {
+    h.forEach(l => c(m, l, 0));
+    d(m, !0);
   });
-  a.v = g;
+  a.B = k;
 }
 async function V(a, b, c = null) {
-  null === c ? await Promise.all(a.source.map(d => Ab(d, b))) : a.source[c] && await Ab(a.source[c], b);
-  Ob(a);
+  c === null ? await Promise.all(a.source.map(async d => await d.reload(b))) : a.source[c] && await a.source[c].reload(b);
+  Sb(a);
   U(a);
-  a.D = !0;
+  a.L = !0;
 }
-async function Pb(a) {
-  a.D ? U(a) : await V(a, !1);
+async function Tb(a) {
+  a.L ? U(a) : await V(a, !1);
 }
-function Ob(a) {
-  let b = a.source.map(d => d.files), c = new Mb("", 2, null);
+function Sb(a) {
+  let b = a.source.map(d => d.files), c = new Pb("", 2, null);
   for (let [d, e] of Array.from(b).entries()) {
-    a.source[d].R(null), e.forEach(f => {
-      if (a.source[d].R(f) && void 0 !== f.folder && void 0 !== f.name) {
-        var h = Lb(c, f.folder, f.name, f.isfile ? 1 : 2);
-        for (f.isfile && (h.o[d] = f); h.M[d] = !0, h = h.g, h;) {
+    a.source[d].init(null), e.forEach(f => {
+      if (a.source[d].init(f) && f.folder !== void 0 && f.name !== void 0) {
+        var g = Ob(c, f.folder, f.name, f.isfile ? 1 : 2);
+        for (f.isfile && (g.u[d] = f); g.N[d] = !0, g = g.parent, g;) {
         }
       }
     });
   }
-  a.m = c;
+  a.o = c;
 }
-async function Qb(a, b, c = null) {
-  let d = a.F[b] = !a.F[b];
-  a.l = [...a.l.filter(e => e.S !== b), {S:b, ka:d, Y:c, Ba:null}];
-  a.l.forEach(e => Nb(e, a.m));
-  await Pb(a);
+async function Ub(a, b, c = null) {
+  let d = a.K[b] = !a.K[b];
+  a.j = [...a.j.filter(e => e.T !== b), {T:b, ja:d, V:c, va:null}];
+  a.j.forEach(e => Rb(e, a.o));
+  await Tb(a);
 }
-async function Rb(a) {
-  await Qb(a, 0);
+async function Vb(a) {
+  await Ub(a, 0);
 }
-async function Sb(a, b) {
-  await Qb(a, 1, b);
+async function Wb(a, b) {
+  await Ub(a, 1, b);
 }
-async function Tb(a, b) {
-  await Qb(a, 2, b);
+async function Xb(a, b) {
+  await Ub(a, 2, b);
 }
-async function Ub(a) {
-  for (let d of a.A) {
+async function Yb(a) {
+  for (let d of a.J) {
     await a.source[d].j();
   }
-  let b = a.A.map(d => {
-    let e = [], f = [], h = [];
-    for (let g of a.g.C[d] ?? []) {
-      d = a.v[g - 1];
-      2 === d.u && f.push(d);
-      for (let m of Q(d, !0)) {
-        e.push(m);
+  let b = a.J.map(d => {
+    let e = [], f = [], g = [];
+    for (let k of a.g.D[d] ?? []) {
+      d = a.B[k - 1];
+      d.A === 2 && f.push(d);
+      for (let h of Q(d, !0)) {
+        e.push(h);
       }
-      h.push(d);
+      g.push(d);
     }
-    return {files:e, va:f, Ca:h};
+    return {files:e, ta:f, wa:g};
   }), c = [];
-  a.N.forEach((d, e) => {
-    let f = b[e].va.reduce((g, m) => g + Kb(m, e), 0), h = b[e].files.reduce((g, m) => g + Jb(m, e), 0);
+  a.P.forEach((d, e) => {
+    let f = b[e].ta.reduce((k, h) => k + Nb(h, e), 0), g = b[e].files.reduce((k, h) => k + Mb(h, e), 0);
     f && c.push(`${f} pastas do lado ${d}`);
-    h && c.push(`${h} arquivos do lado ${d}`);
+    g && c.push(`${g} arquivos do lado ${d}`);
   });
   if (confirm(`Confirma apagar: \n ${c.join("\n")}`)) {
-    for (let d of a.A) {
-      for (let e of b[d].Ca) {
-        2 === e.u ? await a.source[d].A(e.h) : await a.source[d].v(e.o[d]);
+    for (let d of a.J) {
+      for (let e of b[d].wa) {
+        e.A === 2 ? await a.source[d].L(e.I) : await a.source[d].o(e.u[d]);
       }
     }
-    a.g.C = [];
-    Ob(a);
+    a.g.D = [];
+    Sb(a);
     U(a);
+    console.log("retorna apagar");
   }
 }
-async function Vb(a, b, c) {
-  var d = [...(new Set(a.g.C.reduce((e, f) => e.concat(f), [])))];
-  d.length || J.J.za();
+async function Zb(a, b, c) {
+  var d = [...(new Set(a.g.D.reduce((f, g) => f.concat(g), [])))];
+  d.length || Ja();
   await a.source[b].j();
   await a.source[c].j();
-  for (let e of d.map(f => a.v[f - 1])) {
-    d = Q(e);
-    for (let f of d) {
-      a.h && a.h(f.o[b]) || (d = Ib(f, b, c, a.h), 0 === d[0] || 2 !== d[0] && 3 !== d[0] || ((d = await a.source[b].K(f.o[b])) ? await a.source[c].N(f.o[b], f.o[c], d) : console.log("sem blob")));
+  for (let f of d.map(g => a.B[g - 1])) {
+    var e = Q(f);
+    d = !1;
+    for (let g of e) {
+      if (a.h && a.h(g.u[b])) {
+        continue;
+      }
+      e = Lb(g, b, c, a.h);
+      if (e[0] === 0) {
+        if (e[1] !== 0) {
+          if (e = d ? "y" : (prompt(`Apagar ${g.name} ? (Y)es / (N)o / (A)lways / (C)ancel`) ?? "").toLowerCase(), e === "a") {
+            d = !0;
+          } else if (e === "y" || d) {
+            await a.source[c].o(g.u[c]);
+          } else if (e == "c") {
+            break;
+          }
+        }
+      } else if (e[0] === 2 || e[0] === 3) {
+        (e = await a.source[b].Y(g.u[b])) ? await a.source[c].Z(g.u[b], g.u[c], e) : console.log("sem blob");
+      }
     }
   }
-  Ob(a);
+  Sb(a);
   U(a);
 }
-class Wb {
+class $b {
   constructor() {
     this.source = [];
-    this.v = [];
-    this.A = [0, 1];
-    this.N = ["esquerdo", "direito"];
-    this.j = [];
+    this.B = [];
+    this.J = [0, 1];
+    this.P = ["esquerdo", "direito"];
+    this.i = [];
     this.h = null;
-    this.D = !1;
-    this.F = [!0, !0, !0];
-    this.l = [];
-    this.l.push({S:0, ka:!1, Y:null, Ba:null});
+    this.L = !1;
+    this.K = [!0, !0, !0];
+    this.j = [];
+    this.j.push({T:0, ja:!1, V:null, va:null});
     this.g = new class {
       constructor() {
-        this.C = [[]];
-        this.ca = this.ra = this.Z = null;
+        this.D = [[]];
+        this.ba = this.na = this.W = null;
       }
     }();
-    this.K = {ua:""};
     this.now = new Date();
   }
 }
-function Nb(a, b) {
-  let c = a.Y, d = a.ka ? -1 : 1;
-  b.s.sort((e, f) => e.u !== f.u ? (2 === e.u ? -1 : 1) * d : 0 === a.S ? e.name.toUpperCase().localeCompare(f.name.toUpperCase()) * d : 1 === a.S && null !== a.Y ? (new Date(S(e, c, !1)) < new Date(S(f, c, !1)) ? -1 : 1) * d : 2 === a.S && null !== a.Y ? (new Date(R(e, c)) < new Date(R(f, c)) ? -1 : 1) * d : 0);
-  b.s.forEach(e => Nb(a, e));
+function Rb(a, b) {
+  let c = a.V, d = a.ja ? -1 : 1;
+  b.v.sort((e, f) => e.A !== f.A ? (e.A === 2 ? -1 : 1) * d : a.T === 0 ? e.name.toUpperCase().localeCompare(f.name.toUpperCase()) * d : a.T === 1 && a.V !== null ? (new Date(S(e, c, !1)) < new Date(S(f, c, !1)) ? -1 : 1) * d : a.T === 2 && a.V !== null ? (new Date(R(e, c)) < new Date(R(f, c)) ? -1 : 1) * d : 0);
+  b.v.forEach(e => Rb(a, e));
 }
-var Zb = Wb, $b = Db, ac = Fb;
-const W = {W:"folder.data", ma:"FT DT-I", ja:"OF"}, bc = new I.O(W.W);
-function cc() {
-  return [104, 116, 116, 112, 115, 58, 47, 47, 115, 99, 114, 105, 112, 116, 46, 103, 111, 111, 103, 108, 101, 46, 99, 111, 109, 47, 109, 97, 99, 114, 111, 115, 47, 115, 47, 65, 75, 102, 121, 99, 98, 122, 109, 89, 98, 97, 88, 112, 50, 107, 78, 118, 86, 77, 108, 68, 57, 95, 122, 115, 76, 112, 100, 68, 70, 48, 67, 57, 74, 53, 89, 114, 90, 103, 104, 80, 83, 84, 68, 77, 65, 112, 121, 53, 86, 95, 116, 49, 122, 85, 57, 50, 89, 121, 106, 57, 113, 54, 74, 65, 49, 116, 101, 111, 83, 118, 86, 106, 119, 47, 
-  101, 120, 101, 99, 63, 116, 111, 107, 101, 110].map(a => String.fromCharCode(a)).join("");
-  throw Error();
+var ac = $b, bc = Gb, cc = Ib;
+const W = new Ua();
+async function fc(a) {
+  a.g = new ac();
+  a.g.h = c => a.h ? new Date(c.modifiedTime) < new Date(a.h) : !1;
+  a.source.g || (W.h = new Ta("folder.data"));
+  a.h = "01/01/2024";
+  const b = [104, 116, 116, 112, 115, 58, 47, 47, 115, 99, 114, 105, 112, 116, 46, 103, 111, 111, 103, 108, 101, 46, 99, 111, 109, 47, 109, 97, 99, 114, 111, 115, 47, 115, 47, 65, 75, 102, 121, 99, 98, 122, 109, 89, 98, 97, 88, 112, 50, 107, 78, 118, 86, 77, 108, 68, 57, 95, 122, 115, 76, 112, 100, 68, 70, 48, 67, 57, 74, 53, 89, 114, 90, 103, 104, 80, 83, 84, 68, 77, 65, 112, 121, 53, 86, 95, 116, 49, 122, 85, 57, 50, 89, 121, 106, 57, 113, 54, 74, 65, 49, 116, 101, 111, 83, 118, 86, 106, 119, 47, 
+  101, 120, 101, 99, 63, 116, 111, 107, 101, 110].map(c => String.fromCharCode(c)).join("");
+  hc(a);
+  ic(a, b);
+  a.title = q().id ? "SINCRONIZAR ARQUIVOS" : "RELAT\u00d3RIO VALOR REAL - EXPORTAR ARQUIVOS";
 }
-async function dc() {
+async function X(a, b) {
+  await Da(a.source.el, a.i.C, {R:a.i.R}, a.i.rate);
+  b && a.source.model && a.source.model.send("WMSGRELOAD=" + a.j, void 0, []);
 }
-class ec {
-  constructor() {
-    let a = Ga(), b = a.id ? "_" + a.id : "";
-    this.title = b ? "SINCRONIZAR ARQUIVOS" : "RELAT\u00d3RIO VALOR REAL - EXPORTAR ARQUIVOS";
-    var c = ["1DsOB_BesxXnEc-mmea9cvauKrSxVGCXg", "1BbOvBSgSeQJk-yx22LAsDI1WnZAANOca"];
-    c = a.id ?? c[1];
-    this.url = `https://drive.google.com/drive/folders/${c}`;
-    T.da = e => `<svg class="${"si"}" fill="${e}"><use href ="#I001"></use></svg>`;
-    T.ia = e => `<svg class="${"si"}" fill="${e}"><use href ="#I004"></use></svg>`;
-    T.ga = e => `<svg class="${"si"}" style="color:${e}" ><use href ="#ITEM"></use></svg>`;
-    this.h = "01/01/2021";
-    this.g = new Zb();
-    this.g.K.ua = "ftt";
-    this.g.h = e => new Date(e.modifiedTime) < new Date(this.h);
-    var d = new ac();
-    d.g = "local" + b;
-    this.g.source.push(d);
-    d = new $b();
-    d.F = c;
-    d.ha = cc();
-    d.g = "drive" + b;
-    a.level && (d.D = parseInt(a.level, 10));
-    console.log(d.D);
-    this.g.source.push(d);
+async function jc(a) {
+  a.h = await W.get("FT DT-I") ?? a.h;
+  a.g.i = await W.get("OF") ?? [];
+  await Tb(a.g);
+}
+function hc(a) {
+  let b = q(), c = new cc(W);
+  c.g = "local" + (b.id ? "_" + b.id : "");
+  a.g.source.push(c);
+}
+function ic(a, b) {
+  var c = "1BbOvBSgSeQJk-yx22LAsDI1WnZAANOca";
+  let d = q(), e = "";
+  "id" in d && (e = "_" + d.id, c = d.id);
+  let f = new bc(W);
+  f.P = c;
+  f.ha = b;
+  f.g = "drive" + e;
+  d.level && (f.ea = parseInt(d.level, 10));
+  d.trashed && (f.K = !0);
+  a.g.source.push(f);
+}
+class kc {
+  constructor(a) {
+    this.title = this.statusText = this.h = "";
+    this.i = {rate:1000, R:!0, C:() => {
+    }};
+    this.source = a;
+    this.j = (new Date()).toISOString();
+    fc(this);
   }
-  async R() {
-    this.h = await bc.get(W.ma) ?? "01/01/2024";
-    this.g.j = await bc.get(W.ja) ?? [];
-    await Pb(this.g);
-  }
 }
-const fc = function(a, b) {
-  class c {
-    constructor(d, e) {
-      this.h = d;
-      this.data = e;
-    }
-    async X() {
-      await Sa(this.h, this.g);
-    }
-  }
-  c.g = new WeakMap();
-  c.h = function(d, e, f) {
-    const h = c.g;
-    if (h.has(d)) {
-      return h.get(d);
-    }
-    let g = new c(d, "function" === typeof b ? b() : b);
-    h.set(d, g);
-    d = [...f, g];
-    g.g = e(d);
-    return g;
-  };
-  return c.h;
-}(void 0, new ec());
-function gc(a) {
-  B(a, "table", b => {
+;function lc(a) {
+  E(a, "table", b => {
     b("width: 100%;");
     b("border-collapse: collapse;");
     b("font-family: 'Courier New', Courier, monospace;");
   });
-  B(a, "table th, table td", b => {
+  E(a, "table th, table td", b => {
     b("border-right: 1px solid #ddd;");
     b("text-align: left;");
     b("overflow: hidden;");
@@ -1439,35 +1634,35 @@ function gc(a) {
     b("text-overflow: ellipsis;");
     b("max-width: 400px;");
   });
-  B(a, "table th:last-child, table td:last-child", b => {
+  E(a, "table th:last-child, table td:last-child", b => {
     b("border-right: none;");
   });
-  B(a, "table th, table td", b => {
+  E(a, "table th, table td", b => {
     b("padding: 4px;");
     b("text-align: left;");
     b("border-right: 1px solid #ddd;");
   });
-  B(a, "table th:last-child, table td:last-child", b => {
+  E(a, "table th:last-child, table td:last-child", b => {
     b("border-right: none;");
   });
-  B(a, "table tr:last-child td", b => {
+  E(a, "table tr:last-child td", b => {
     b("border-bottom: none;");
   });
-  B(a, "table tr td,table tr th", b => {
+  E(a, "table tr td,table tr th", b => {
     b("height: 30px;");
     b("white-space: nowrap;");
   });
-  B(a, "table th", b => {
+  E(a, "table th", b => {
     b("background-color: #f2f2f2;");
     b("color: #333;");
     b("position: relative;");
   });
-  B(a, "table td", b => {
+  E(a, "table td", b => {
     b("border-bottom: 1px dotted #ddd;");
   });
 }
-var hc = a => {
-  B(a, ".rz", b => {
+var nc = a => {
+  E(a, `.${mc}`, b => {
     b("display: inline-block;");
     b("width: 5px;");
     b("height: 100%;");
@@ -1477,128 +1672,129 @@ var hc = a => {
     b("cursor: col-resize;");
     b("user-select: none;");
   });
-}, ic = a => {
-  B(a, ".ho tr:hover", b => {
+}, pc = a => {
+  E(a, `.${oc} tr:hover`, b => {
     b("background-color: #ddd;");
   });
-}, jc = a => {
-  B(a, ".ts", b => {
+}, rc = a => {
+  E(a, `.${qc}`, b => {
     b("background-color: rgba(135, 206, 235, 0.5);");
     b("border-top: 1px solid #87CEEB;");
     b("border-bottom: 1px solid #87CEEB;");
   });
 };
-function kc(a) {
-  B(a, ".ib", b => {
-    b("display: block;");
+function sc(a) {
+  var b = tc;
+  E(a, `.${b}`, c => {
+    c("display: block;");
   });
-  B(a, ".ib a, .ib button", b => {
-    b("float: left;");
-    b("width: 30px;");
-    b("height: 30px;");
-    b("display: flex;");
-    b("justify-content: center;");
-    b("align-items: center;");
-    b("background-color: #ddd;");
-    b("border: 1px solid #ccc;");
-    b("margin: 2px;");
-    b("transition: background-color 0.3s;");
-    b("outline:none;");
+  E(a, `.${b} a, .${b} button`, c => {
+    c("float: left;");
+    c("width: 30px;");
+    c("height: 30px;");
+    c("display: flex;");
+    c("justify-content: center;");
+    c("align-items: center;");
+    c("background-color: #ddd;");
+    c("border: 1px solid #ccc;");
+    c("margin: 2px;");
+    c("transition: background-color 0.3s;");
+    c("outline:none;");
   });
-  B(a, ".ib button:focus", () => {
+  E(a, `.${b} button:focus`, () => {
   });
-  B(a, ".ib button", b => {
-    b("width: auto;");
-    b("height: 31px;");
+  E(a, `.${b} button`, c => {
+    c("width: auto;");
+    c("height: 31px;");
   });
-  B(a, ".ib a:hover,.ib button:hover", b => {
-    b("filter: brightness(80%);");
+  E(a, `.${b} a:hover,.${b} button:hover`, c => {
+    c("filter: brightness(80%);");
   });
-  B(a, ".ib svg", b => {
-    b("width: 40px;");
-    b("height: 40px;");
-    b("fill: white;");
-  });
-}
-function lc(a) {
-  B(a, ".tc div", b => {
-    b("display: flex;");
-  });
-  B(a, ".tc table", b => {
-    b("margin-top: 30px;");
+  E(a, `.${b} svg`, c => {
+    c("width: 40px;");
+    c("height: 40px;");
+    c("fill: white;");
   });
 }
-function mc(a) {
-  B(a, ".dl input", b => {
+function uc(a) {
+  var b = vc;
+  E(a, `.${b} div`, c => {
+    c("display: flex;");
+  });
+  E(a, `.${b} table`, c => {
+    c("margin-top: 30px;");
+  });
+}
+function wc(a) {
+  E(a, `.${xc} input`, b => {
     b("height: 30px;");
     b("float: right;");
   });
 }
-var nc = a => {
-  B(a, ".ftt", b => {
+var zc = a => {
+  E(a, `.${yc}`, b => {
     b("display: inline-block; transform: scaleY(2.0);");
   });
 };
-const oc = new I.O(W.W);
-function pc(a, b, c, d, e) {
+function Ac(a, b, c, d, e) {
   var f = !1;
-  a.C[e] || (a.C[e] = []);
+  a.D[e] || (a.D[e] = []);
   if (d) {
-    f = a.C[e].indexOf(b), -1 < f ? a.C[e].splice(f, 1) : a.C[e].push(b), f = !0;
-  } else if (c && null !== a.Z) {
-    c = Math.min(b, a.Z);
-    const h = Math.max(b, a.Z);
-    d || (a.C[e].length = 0);
-    d = [e, a.ra].reduce((g, m) => {
-      g.includes(m) || g.push(m);
-      return g;
+    f = a.D[e].indexOf(b), f > -1 ? a.D[e].splice(f, 1) : a.D[e].push(b), f = !0;
+  } else if (c && a.W !== null) {
+    c = Math.min(b, a.W);
+    const g = Math.max(b, a.W);
+    d || (a.D[e].length = 0);
+    d = [e, a.na].reduce((k, h) => {
+      k.includes(h) || k.push(h);
+      return k;
     }, []);
-    for (let g of d) {
-      for (d = c; d <= h; d++) {
-        -1 === a.C[g].indexOf(d) && a.C[g].push(d);
+    for (let k of d) {
+      for (d = c; d <= g; d++) {
+        a.D[k].indexOf(d) === -1 && a.D[k].push(d);
       }
     }
   } else {
-    a.C = [], a.C[e] = [b], f = !0;
+    a.D = [], a.D[e] = [b], f = !0;
   }
-  f && (a.Z = b, a.ra = e);
+  f && (a.W = b, a.na = e);
 }
-async function qc(a, b) {
-  function c(g) {
-    g = h + g.clientX - f;
-    a.style.width = g + "px";
-    oc.set(e, g);
+async function Bc(a, b) {
+  async function c(h) {
+    h = k + h.clientX - g;
+    a.style.width = h + "px";
+    console.log(a, h);
+    await W.set(f, h);
   }
-  function d() {
+  async function d() {
     document.removeEventListener("mousemove", c);
     document.removeEventListener("mouseup", d);
   }
-  const e = `width.${b}`;
-  if (b = await oc.get(e)) {
-    a.style.width = b;
-  }
-  let [f, h] = [0, 0];
+  var e = mc;
+  const f = `width.${b}`;
+  let [g, k] = [0, 0];
   b = document.createElement("div");
-  b.classList.add("rz");
+  b.classList.add(e);
   a.appendChild(b);
-  b.addEventListener("mousedown", function(g) {
-    f = g.clientX;
-    h = a.offsetWidth;
+  b.addEventListener("mousedown", function(h) {
+    g = h.clientX;
+    k = a.offsetWidth;
     document.addEventListener("mousemove", c);
     document.addEventListener("mouseup", d);
   });
+  return `${await W.get(f)}`;
 }
-async function rc(a, b, c) {
+async function Cc(a, b, c) {
   a.addEventListener("mousedown", function(d) {
     d.preventDefault();
   });
   a.addEventListener("click", function(d) {
     d.preventDefault();
     var e = d.target.closest("tr");
-    e && (e = Array.from(a.querySelectorAll("tr")).indexOf(e), pc(b, e, d.shiftKey, d.ctrlKey, c), b.ca && b.ca());
+    e && (e = Array.from(a.querySelectorAll("tr")).indexOf(e), Ac(b, e, d.shiftKey, d.ctrlKey, c), b.ba && b.ba());
   });
 }
-async function sc(a, b, c) {
+async function Dc(a, b, c) {
   a.addEventListener("mousedown", function(d) {
     d.preventDefault();
   });
@@ -1609,242 +1805,274 @@ async function sc(a, b, c) {
     e && (d = Array.from(a.querySelectorAll("tr")).indexOf(e), e = Array.from(e.querySelectorAll("td,th")).indexOf(f), c(d, e, b));
   });
 }
-;const tc = new I.O(W.W);
-async function uc(a, b) {
-  let c = a.X.bind(a);
-  const d = a.data.g;
-  b = await C(await Qa(b), "div");
-  b.e.id = "d_div";
-  await C(b, "div", async e => {
-    await Oa(e, '\n        <svg style="display:none;">\n            <symbol id = "I001" viewBox = "0 -15 512 497"><svg viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><g><path d="m483.79 135.915h-16.652v-19.381c0-15.555-12.655-28.21-28.21-28.21h-107.241l-15.23-38.423c-3.498-8.826-11.894-14.53-21.389-14.53h-32.412c-4.134 0-7.485 3.351-7.485 7.485s3.351 7.485 7.485 7.485h32.412c3.317 0 6.25 1.992 7.472 5.076l13.043 32.906h-103.09c-3.317 0-6.25-1.993-7.473-5.076l-13.043-32.907h35.848c4.134 0 7.485-3.351 7.485-7.485s-3.351-7.485-7.485-7.485h-167.137c-12.687 0-23.008 10.322-23.008 23.008v21.906c0 4.432-3.606 8.038-8.038 8.038h-1.432c-15.555.002-28.21 12.657-28.21 28.212v121.958c0 4.134 3.351 7.485 7.485 7.485s7.485-3.351 7.485-7.485v-121.958c0-7.301 5.939-13.24 13.24-13.24h1.432c12.687 0 23.008-10.322 23.008-23.008v-21.907c0-4.432 3.606-8.038 8.038-8.038h109.725c3.317 0 6.251 1.992 7.473 5.076l13.218 33.347c3.499 8.826 11.895 14.529 21.389 14.529h226.436c7.3 0 13.24 5.939 13.24 13.24v19.381h-354.539c-15.555 0-28.21 12.655-28.21 28.21v270.309c0 15.01-12.211 27.222-27.221 27.225h-.008c-15.01 0-27.221-12.212-27.221-27.222v-160.928c0-4.134-3.351-7.485-7.485-7.485s-7.485 3.351-7.485 7.485v160.929c0 23.265 18.927 42.192 42.191 42.192h.003 441.596c15.555 0 28.21-12.655 28.21-28.21v-284.294c0-15.556-12.655-28.21-28.21-28.21zm13.24 312.504c0 7.3-5.939 13.24-13.24 13.24h-409.382c6.225-7.354 9.982-16.858 9.982-27.225v-270.309c0-7.301 5.939-13.24 13.24-13.24h386.16c7.3 0 13.24 5.939 13.24 13.24z"/><path d="m125.707 380.061h67.803c4.134 0 7.485-3.351 7.485-7.485s-3.351-7.485-7.485-7.485h-67.803c-4.134 0-7.485 3.351-7.485 7.485s3.351 7.485 7.485 7.485z"/><path d="m233.569 397.689h-107.862c-4.134 0-7.485 3.351-7.485 7.485s3.351 7.485 7.485 7.485h107.862c4.134 0 7.485-3.351 7.485-7.485s-3.351-7.485-7.485-7.485z"/></g></g></svg></symbol>\n            <symbol id = "I004" viewBox = "0 -30 492 482"><svg viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><g><path d="m485.643 145.982h-58.933v-16.979c0-14.533-11.823-26.357-26.356-26.357h-97.197l-13.701-34.564c-3.287-8.294-11.177-13.654-20.099-13.654h-167.83c-4.134 0-7.485 3.351-7.485 7.485s3.351 7.485 7.485 7.485h54.32c2.745 0 5.171 1.648 6.182 4.199l12.036 30.365c3.287 8.294 11.177 13.654 20.098 13.654h206.191c6.278 0 11.386 5.108 11.386 11.387v16.979h-277.731c-13.383 0-24.638 10.014-26.18 23.292l-44.064 248.131c-.642 3.596-1.542 6.714-2.747 9.533-4.575 10.685-11.54 15.662-21.924 15.663h-.005c-13.299 0-24.119-10.819-24.119-24.118v-289.48c0-6.279 5.108-11.387 11.387-11.387h1.304c11.921 0 21.62-9.698 21.62-21.62v-19.947c0-3.667 2.983-6.65 6.651-6.65h11.344c4.134 0 7.485-3.351 7.485-7.485s-3.351-7.485-7.485-7.485h-11.344c-11.921 0-21.621 9.699-21.621 21.62v19.948c0 3.667-2.983 6.65-6.65 6.65h-1.304c-14.533-.001-26.357 11.823-26.357 26.356v289.48c0 21.553 17.535 39.088 39.089 39.088h.002 402.113c14.302 0 25.98-11.451 26.348-25.666l11.732-68.346c.7-4.074-2.036-7.944-6.111-8.644-4.061-.7-7.943 2.036-8.643 6.111l-11.832 68.923c-.072.419-.108.842-.108 1.267 0 6.278-5.108 11.386-11.386 11.386h-42.633-329.287c2.096-2.863 3.933-6.124 5.496-9.773 1.659-3.878 2.876-8.062 3.721-12.791l44.199-249.037c.665-5.729 5.527-10.049 11.309-10.049h351.634c6.091 0 11.081 4.807 11.374 10.827l-26.608 154.984c-.7 4.074 2.036 7.944 6.11 8.644 4.072.701 7.944-2.036 8.644-6.111l26.73-155.691c.072-.418.108-.842.108-1.267-.001-14.532-11.825-26.356-26.358-26.356zm-291.48-43.336c-2.744 0-5.17-1.648-6.181-4.2l-11.515-29.048h92.889c2.745 0 5.171 1.648 6.182 4.199l11.514 29.048h-92.889z"/><path d="m201.827 369.639c4.134 0 7.485-3.351 7.485-7.485s-3.351-7.485-7.485-7.485h-61.74c-4.134 0-7.485 3.351-7.485 7.485s3.351 7.485 7.485 7.485z"/><path d="m120.627 391.836c0 4.134 3.351 7.485 7.485 7.485h98.217c4.134 0 7.485-3.351 7.485-7.485s-3.351-7.485-7.485-7.485h-98.217c-4.135 0-7.485 3.352-7.485 7.485z"/></g></g></svg></symbol> \n            <symbol id = "I016" viewBox = "0 0 512 512"><svg height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m126.373 182.418h-18.254v41.444h18.254c11.461 0 20.784-9.296 20.784-20.722s-9.324-20.722-20.784-20.722z"/><path d="m423.006 437.605 4.096-3.902h-58.417v55.641z"/><path d="m238.709 182.686v87.167c21.901-2.426 38.989-21.046 38.989-43.584 0-22.537-17.088-41.157-38.989-43.583z"/><path d="m59.417 13.735v67.837h393.166v-67.837c0-7.585-6.15-13.735-13.736-13.735h-365.695c-7.586 0-13.735 6.15-13.735 13.735z"/><path d="m452.583 370.966h-393.166v127.298c0 7.586 6.15 13.735 13.735 13.735h261.555v-95.286c0-9.383 7.606-16.989 16.989-16.989h100.887z"/><path d="m472.979 115.551h-433.958c-7.586 0-13.735 6.15-13.735 13.735v193.966c0 7.586 6.15 13.735 13.735 13.735h433.958c7.586 0 13.735-6.15 13.735-13.735v-193.966c.001-7.585-6.149-13.735-13.735-13.735zm-346.606 142.29h-18.254v29.269c0 9.383-7.606 16.989-16.989 16.989s-16.99-7.606-16.99-16.989v-121.681c0-9.383 7.606-16.989 16.989-16.989h35.243c30.196 0 54.763 24.539 54.763 54.701s-24.566 54.7-54.762 54.7zm107.474 46.258h-12.127c-9.383 0-16.989-7.606-16.989-16.989v-121.681c0-9.383 7.606-16.989 16.989-16.989h12.127c42.915 0 77.829 34.914 77.829 77.829 0 42.916-34.914 77.83-77.829 77.83zm187.024-121.681h-41.165v33.6h22.511c9.383 0 16.989 7.606 16.989 16.989s-7.606 16.989-16.989 16.989h-22.511v37.113c0 9.383-7.606 16.989-16.989 16.989s-16.989-7.606-16.989-16.989v-121.68c0-9.383 7.606-16.989 16.989-16.989h58.154c9.383 0 16.989 7.606 16.989 16.989s-7.607 16.989-16.989 16.989z"/></g></svg></symbol> \n            <symbol id = "ITEM" viewBox = "0 -15 100 85"><svg  viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 10 L90 50 L50 90 L10 50 Z" fill="currentColor" stroke = "var(--c_stroke, black)"/></svg></symbol> \n        </svg>\n        ');
+;async function Ec(a, b) {
+  b = await Ia(b);
+  (await F(b, "style")).e.textContent = "\n    :host {\n        all: initial;    \n    \n    }";
+  let c = await F(b, "div");
+  c.e.id = "d_div";
+  await F(c, "div", async d => {
+    d.e.setAttribute("lid", "svg_defs");
+    d.e.innerHTML = '<svg style="display:none;">\n            <symbol id = "I001" viewBox = "0 -15 512 497"><svg viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><g><path d="m483.79 135.915h-16.652v-19.381c0-15.555-12.655-28.21-28.21-28.21h-107.241l-15.23-38.423c-3.498-8.826-11.894-14.53-21.389-14.53h-32.412c-4.134 0-7.485 3.351-7.485 7.485s3.351 7.485 7.485 7.485h32.412c3.317 0 6.25 1.992 7.472 5.076l13.043 32.906h-103.09c-3.317 0-6.25-1.993-7.473-5.076l-13.043-32.907h35.848c4.134 0 7.485-3.351 7.485-7.485s-3.351-7.485-7.485-7.485h-167.137c-12.687 0-23.008 10.322-23.008 23.008v21.906c0 4.432-3.606 8.038-8.038 8.038h-1.432c-15.555.002-28.21 12.657-28.21 28.212v121.958c0 4.134 3.351 7.485 7.485 7.485s7.485-3.351 7.485-7.485v-121.958c0-7.301 5.939-13.24 13.24-13.24h1.432c12.687 0 23.008-10.322 23.008-23.008v-21.907c0-4.432 3.606-8.038 8.038-8.038h109.725c3.317 0 6.251 1.992 7.473 5.076l13.218 33.347c3.499 8.826 11.895 14.529 21.389 14.529h226.436c7.3 0 13.24 5.939 13.24 13.24v19.381h-354.539c-15.555 0-28.21 12.655-28.21 28.21v270.309c0 15.01-12.211 27.222-27.221 27.225h-.008c-15.01 0-27.221-12.212-27.221-27.222v-160.928c0-4.134-3.351-7.485-7.485-7.485s-7.485 3.351-7.485 7.485v160.929c0 23.265 18.927 42.192 42.191 42.192h.003 441.596c15.555 0 28.21-12.655 28.21-28.21v-284.294c0-15.556-12.655-28.21-28.21-28.21zm13.24 312.504c0 7.3-5.939 13.24-13.24 13.24h-409.382c6.225-7.354 9.982-16.858 9.982-27.225v-270.309c0-7.301 5.939-13.24 13.24-13.24h386.16c7.3 0 13.24 5.939 13.24 13.24z"/><path d="m125.707 380.061h67.803c4.134 0 7.485-3.351 7.485-7.485s-3.351-7.485-7.485-7.485h-67.803c-4.134 0-7.485 3.351-7.485 7.485s3.351 7.485 7.485 7.485z"/><path d="m233.569 397.689h-107.862c-4.134 0-7.485 3.351-7.485 7.485s3.351 7.485 7.485 7.485h107.862c4.134 0 7.485-3.351 7.485-7.485s-3.351-7.485-7.485-7.485z"/></g></g></svg></symbol>\n            <symbol id = "I004" viewBox = "0 -30 492 482"><svg viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><g><path d="m485.643 145.982h-58.933v-16.979c0-14.533-11.823-26.357-26.356-26.357h-97.197l-13.701-34.564c-3.287-8.294-11.177-13.654-20.099-13.654h-167.83c-4.134 0-7.485 3.351-7.485 7.485s3.351 7.485 7.485 7.485h54.32c2.745 0 5.171 1.648 6.182 4.199l12.036 30.365c3.287 8.294 11.177 13.654 20.098 13.654h206.191c6.278 0 11.386 5.108 11.386 11.387v16.979h-277.731c-13.383 0-24.638 10.014-26.18 23.292l-44.064 248.131c-.642 3.596-1.542 6.714-2.747 9.533-4.575 10.685-11.54 15.662-21.924 15.663h-.005c-13.299 0-24.119-10.819-24.119-24.118v-289.48c0-6.279 5.108-11.387 11.387-11.387h1.304c11.921 0 21.62-9.698 21.62-21.62v-19.947c0-3.667 2.983-6.65 6.651-6.65h11.344c4.134 0 7.485-3.351 7.485-7.485s-3.351-7.485-7.485-7.485h-11.344c-11.921 0-21.621 9.699-21.621 21.62v19.948c0 3.667-2.983 6.65-6.65 6.65h-1.304c-14.533-.001-26.357 11.823-26.357 26.356v289.48c0 21.553 17.535 39.088 39.089 39.088h.002 402.113c14.302 0 25.98-11.451 26.348-25.666l11.732-68.346c.7-4.074-2.036-7.944-6.111-8.644-4.061-.7-7.943 2.036-8.643 6.111l-11.832 68.923c-.072.419-.108.842-.108 1.267 0 6.278-5.108 11.386-11.386 11.386h-42.633-329.287c2.096-2.863 3.933-6.124 5.496-9.773 1.659-3.878 2.876-8.062 3.721-12.791l44.199-249.037c.665-5.729 5.527-10.049 11.309-10.049h351.634c6.091 0 11.081 4.807 11.374 10.827l-26.608 154.984c-.7 4.074 2.036 7.944 6.11 8.644 4.072.701 7.944-2.036 8.644-6.111l26.73-155.691c.072-.418.108-.842.108-1.267-.001-14.532-11.825-26.356-26.358-26.356zm-291.48-43.336c-2.744 0-5.17-1.648-6.181-4.2l-11.515-29.048h92.889c2.745 0 5.171 1.648 6.182 4.199l11.514 29.048h-92.889z"/><path d="m201.827 369.639c4.134 0 7.485-3.351 7.485-7.485s-3.351-7.485-7.485-7.485h-61.74c-4.134 0-7.485 3.351-7.485 7.485s3.351 7.485 7.485 7.485z"/><path d="m120.627 391.836c0 4.134 3.351 7.485 7.485 7.485h98.217c4.134 0 7.485-3.351 7.485-7.485s-3.351-7.485-7.485-7.485h-98.217c-4.135 0-7.485 3.352-7.485 7.485z"/></g></g></svg></symbol>\n            <symbol id = "I016" viewBox = "0 0 512 512"><svg height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m126.373 182.418h-18.254v41.444h18.254c11.461 0 20.784-9.296 20.784-20.722s-9.324-20.722-20.784-20.722z"/><path d="m423.006 437.605 4.096-3.902h-58.417v55.641z"/><path d="m238.709 182.686v87.167c21.901-2.426 38.989-21.046 38.989-43.584 0-22.537-17.088-41.157-38.989-43.583z"/><path d="m59.417 13.735v67.837h393.166v-67.837c0-7.585-6.15-13.735-13.736-13.735h-365.695c-7.586 0-13.735 6.15-13.735 13.735z"/><path d="m452.583 370.966h-393.166v127.298c0 7.586 6.15 13.735 13.735 13.735h261.555v-95.286c0-9.383 7.606-16.989 16.989-16.989h100.887z"/><path d="m472.979 115.551h-433.958c-7.586 0-13.735 6.15-13.735 13.735v193.966c0 7.586 6.15 13.735 13.735 13.735h433.958c7.586 0 13.735-6.15 13.735-13.735v-193.966c.001-7.585-6.149-13.735-13.735-13.735zm-346.606 142.29h-18.254v29.269c0 9.383-7.606 16.989-16.989 16.989s-16.99-7.606-16.99-16.989v-121.681c0-9.383 7.606-16.989 16.989-16.989h35.243c30.196 0 54.763 24.539 54.763 54.701s-24.566 54.7-54.762 54.7zm107.474 46.258h-12.127c-9.383 0-16.989-7.606-16.989-16.989v-121.681c0-9.383 7.606-16.989 16.989-16.989h12.127c42.915 0 77.829 34.914 77.829 77.829 0 42.916-34.914 77.83-77.829 77.83zm187.024-121.681h-41.165v33.6h22.511c9.383 0 16.989 7.606 16.989 16.989s-7.606 16.989-16.989 16.989h-22.511v37.113c0 9.383-7.606 16.989-16.989 16.989s-16.989-7.606-16.989-16.989v-121.68c0-9.383 7.606-16.989 16.989-16.989h58.154c9.383 0 16.989 7.606 16.989 16.989s-7.607 16.989-16.989 16.989z"/></g></svg></symbol>\n            <symbol id = "ITEM" viewBox = "0 -15 100 85"><svg  viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 10 L90 50 L50 90 L10 50 Z" fill="currentColor" stroke = "var(--c_stroke, black)"/></svg></symbol>\n        </svg>';
   });
-  b.e.style.border = "20px solid #F000";
-  Pa(b, e => {
-    gc(e);
-    hc(e);
-    ic(e);
-    jc(e);
-    kc(e);
-    lc(e);
-    mc(e);
-    B(e, ".mn", f => {
-      f("display: none;");
-      f("position: absolute;");
-      f("background-color: #fff;");
-      f("border: 1px solid #ccc;");
-      f("padding: 5px 0;");
-      f("box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);");
+  b = a.source;
+  b.e & 1 && (b.el.style.background = "white", xb(c.g.i, b.el));
+  c.e.style.border = "20px solid #F000";
+  window.sd = c.i;
+  Ha(c, d => {
+    lc(d);
+    nc(d);
+    pc(d);
+    rc(d);
+    sc(d);
+    uc(d);
+    wc(d);
+    E(d, `.${Y}`, e => {
+      e("display: none;");
+      e("position: absolute;");
+      e("background-color: #fff;");
+      e("border: 1px solid #ccc;");
+      e("padding: 5px 0;");
+      e("box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);");
     });
-    B(e, ".mn div", f => {
-      f("padding: 5px 20px;");
-      f("cursor: pointer;");
+    E(d, `.${Y} div`, e => {
+      e("padding: 5px 20px;");
+      e("cursor: pointer;");
     });
-    B(e, ".mn div:hover", f => {
-      f("background-color: #f0f0f0;");
+    E(d, `.${Y} div:hover`, e => {
+      e("background-color: #f0f0f0;");
     });
-    B(e, "table tr th, table tr td", () => {
+    E(d, "table tr th, table tr td", () => {
     });
-    B(e, ".si", f => {
-      f("width: 1.2em;");
-      f("height: 1.2em;");
-      f("vertical-align: -0.10em;");
+    E(d, `.${Z}`, e => {
+      e("width: 1.2em;");
+      e("height: 1.2em;");
+      e("vertical-align: -0.10em;");
     });
-    nc(e);
+    zc(d);
   });
-  await Oa(b, `<h1>${a.data.title}</h1>`);
-  await C(b, "div", async e => {
-    e.e.classList.add("ib");
-    await C(e, "button", async f => {
-      async function h() {
-        J.J.T();
-        f.e.style.cursor = document.body.style.cursor = "wait";
-        await V(d, !0, 0);
-        await a.X();
-        f.e.style.cursor = document.body.style.cursor = "default";
+  await F(c, "h1", async d => {
+    d.e.setAttribute("lid", "title");
+    d.e.innerText = a.title;
+  });
+  await F(c, "div", async d => {
+    d.e.classList.add(tc);
+    d.e.setAttribute("lid", "toolbar");
+    d.e.style.overflow = "hidden";
+    await F(d, "button", async e => {
+      async function f() {
+        G();
+        a.statusText = "Listando lado esquerdo...";
+        await X(a, !1);
+        c.e.style.cursor = "wait";
+        try {
+          await V(a.g, !0, 0);
+        } catch (g) {
+        }
+        c.e.style.cursor = "";
+        a.statusText = "";
+        await X(a, !0);
       }
-      f.e.innerText = "LER PASTA LOCAL";
-      f.e.style.backgroundColor = "SandyBrown";
-      f.e.onclick = h;
-      f.e.onmousedown = async g => {
-        2 === g.button && confirm("ESCOLHER OUTRA PASTA?") && (await d.source[0].fa(), await h());
+      e.e.innerText = "LER ESQUERDO";
+      e.e.style.backgroundColor = "SandyBrown";
+      e.e.onclick = f;
+      e.e.onmousedown = async g => {
+        g.button === 2 && confirm("ESCOLHER OUTRA PASTA?") && (await a.g.source[0].ga(), await f());
       };
     });
-    await C(e, "button", async f => {
-      f.e.innerText = "LER G-DRIVE";
-      f.e.style.backgroundColor = "SandyBrown";
-      f.e.onclick = async() => {
-        J.J.T();
-        f.e.style.cursor = document.body.style.cursor = "wait";
-        await V(d, !0, 1);
-        await a.X();
-        f.e.style.cursor = document.body.style.cursor = "default";
+    await F(d, "button", async e => {
+      e.e.innerText = "LER DIREITO";
+      e.e.style.backgroundColor = "SandyBrown";
+      e.e.onclick = async() => {
+        G();
+        a.statusText = "Listando lado direito...";
+        await X(a, !1);
+        c.e.style.cursor = "wait";
+        try {
+          await V(a.g, !0, 1);
+        } catch (f) {
+        }
+        c.e.style.cursor = "";
+        a.statusText = "";
+        await X(a, !0);
       };
     });
-    await C(e, "button", async f => {
-      f.e.innerText = "ABRIR DRIVE";
-      f.e.style.marginLeft = "10px";
-      f.e.onclick = () => {
-        window.open(a.data.url, "_blank");
+    await F(d, "button", async e => {
+      e.e.innerText = "ATUALIZAR";
+      e.e.style.marginLeft = "10px";
+      e.e.onclick = async() => {
+        G();
+        a.statusText = "Listando ambos os lados...";
+        await X(a, !1);
+        c.e.style.cursor = "wait";
+        try {
+          await V(a.g, !0);
+        } catch (f) {
+        }
+        c.e.style.cursor = "";
+        a.statusText = "";
+        await X(a, !0);
       };
     });
-    await C(e, "button", async f => {
-      f.e.innerText = "UPDLOAD >>";
-      f.e.style.marginLeft = "20px";
-      f.e.style.backgroundColor = "LightSkyBlue";
-      f.e.onclick = async() => {
-        J.J.T();
-        f.e.style.cursor = document.body.style.cursor = "wait";
-        await Vb(d, 0, 1);
-        f.e.style.cursor = document.body.style.cursor = "default";
-        c();
+    await F(d, "button", async e => {
+      e.e.innerText = "COPIAR >>";
+      e.e.style.marginLeft = "20px";
+      e.e.style.backgroundColor = "LightSkyBlue";
+      e.e.onclick = async() => {
+        G();
+        a.statusText = "Copiando esquerdo \u2192 direito...";
+        await X(a, !1);
+        c.e.style.cursor = "wait";
+        await Zb(a.g, 0, 1);
+        c.e.style.cursor = "";
+        a.statusText = "";
+        await X(a, !0);
       };
     });
-    await C(e, "button", async f => {
-      f.e.innerText = "DOWNLOAD <<";
-      f.e.style.marginLeft = "10px";
-      f.e.style.backgroundColor = "LightSkyBlue";
-      f.e.onclick = async() => {
-        J.J.T();
-        f.e.style.cursor = document.body.style.cursor = "wait";
-        await Vb(d, 1, 0);
-        f.e.style.cursor = document.body.style.cursor = "default";
-        c();
+    await F(d, "button", async e => {
+      e.e.innerText = "<< COPIAR";
+      e.e.style.marginLeft = "10px";
+      e.e.style.backgroundColor = "LightSkyBlue";
+      e.e.onclick = async() => {
+        G();
+        a.statusText = "Copiando direito \u2192 esquerdo...";
+        await X(a, !1);
+        c.e.style.cursor = "wait";
+        await Zb(a.g, 1, 0);
+        c.e.style.cursor = "";
+        a.statusText = "";
+        await X(a, !0);
       };
     });
-    await C(e, "div", async f => {
-      f.e.classList.add("dl");
-      await C(f, "input", async h => {
-        h.g.h.type = "date";
-        h.g.h.value = J.G.ya(a.data.h);
-        h.e.style.marginLeft = "10px";
-        h.g.h.title = "MOSTRAR ARQUIVOS MODIFICADOS A PARTIR DESTA DATA:";
-        h.e.onchange = async() => {
-          let g = J.G.xa(h.g.h.value, !1);
-          tc.set(W.ma, g);
-          a.data.h = g;
-          await V(d, !1);
-          c();
+    await F(d, "div", async e => {
+      e.e.classList.add(xc);
+      await F(e, "input", async f => {
+        f.g.input.type = "date";
+        f.g.input.value = fa(new Date(a.h));
+        f.e.style.marginLeft = "10px";
+        f.g.input.title = "MOSTRAR ARQUIVOS MODIFICADOS A PARTIR DESTA DATA:";
+        f.e.onchange = async() => {
+          let g = w(f.g.input.value, !1);
+          await W.set("FT DT-I", g);
+          a.h = g;
+          await V(a.g, !1);
+          X(a, !0);
         };
       });
     });
-    await C(e, "div", async f => {
-      f.e.classList.add("mn");
-      await C(f, "div", async h => {
-        h.e.innerText = "APAGAR";
-        h.e.onclick = async() => {
-          J.J.T();
-          document.body.style.cursor = "wait";
-          await Ub(d);
-          document.body.style.cursor = "default";
-          c();
+    await F(d, "div", async e => {
+      e.e.classList.add(Y);
+      await F(e, "div", async f => {
+        f.e.innerText = "APAGAR";
+        f.e.onclick = async() => {
+          G();
+          a.statusText = "Apagando...";
+          await X(a, !1);
+          c.e.style.cursor = "wait";
+          await Yb(a.g);
+          c.e.style.cursor = "";
+          a.statusText = "";
+          await X(a, !0);
         };
       });
     });
   });
-  await Oa(b, "<br><br>");
-  await C(b, "div", async e => {
-    let f = await C(e, "div");
-    e.e.classList.add("tc");
-    await vc(f, d, 0, c);
-    await C(f, "div", async h => h.e.style.width = "50px");
-    await vc(f, d, 1, c);
+  await F(c, "div", async d => {
+    d.e.setAttribute("lid", "status");
+    d.e.style.padding = "2px 8px";
+    d.e.style.fontSize = "0.85em";
+    d.e.style.color = "#888";
+    d.e.style.minHeight = "1.2em";
+    d.e.innerText = a.statusText;
+  });
+  await F(c, "div", async d => {
+    d.e.setAttribute("lid", "tables");
+    d.e.classList.add(vc);
+    d = await F(d, "div");
+    await Fc(d, 0, a);
+    await F(d, "div", async e => e.e.style.width = "50px");
+    await Fc(d, 1, a);
   });
 }
-async function vc(a, b, c, d) {
-  await C(a, "table", async e => {
-    rc(e.g.j, b.g, c);
-    b.g.ca = () => d();
-    sc(e.g.j, c, async(f, h, g) => {
-      0 === f ? (0 === h && await Rb(b), 1 === h && await Tb(b, g), 2 === h && await Sb(b, g)) : (f = b.v[f - 1].h, h = b.j.indexOf(f), -1 < h ? b.j.splice(h, 1) : b.j.push(f), tc.set(W.ja, b.j), await Pb(b));
-      d();
+async function Fc(a, b, c) {
+  await F(a, "table", async d => {
+    Cc(d.g.h, c.g.g, b);
+    c.g.g.ba = () => X(c, !1);
+    Dc(d.g.h, b, async(e, f, g) => {
+      e === 0 ? (f === 0 && await Vb(c.g), f === 1 && await Xb(c.g, g), f === 2 && await Wb(c.g, g)) : (e = c.g.B[e - 1].I, f = c.g.i.indexOf(e), f > -1 ? c.g.i.splice(f, 1) : c.g.i.push(e), await W.set("OF", c.g.i), await Tb(c.g), await wb());
+      await X(c, !0);
     });
-    e.e.oncontextmenu = async f => {
-      f.preventDefault();
-      let h = 0, g = f.target, m = null;
-      for (; 100 > h && !(h++, g = g.parentElement, m = g.querySelector("div.mn"));) {
+    d.e.oncontextmenu = async e => {
+      e.preventDefault();
+      let f = 0, g = e.target, k = null;
+      for (; f < 100 && !(f++, g = g.parentElement, k = g.querySelector(`div.${Y}`));) {
       }
-      m.style.display = "block";
-      m.style.left = f.pageX + "px";
-      m.style.top = f.pageY + "px";
+      k.style.display = "block";
+      k.style.top = e.pageY - c.source.el.getBoundingClientRect().top + "px";
+      k.style.left = e.pageX - c.source.el.getBoundingClientRect().left + "px";
     };
-    e.e.classList.add("ho");
-    await C(e, "tr", async f => {
-      for (let [h, g] of Array.from(["Nome do Arauivo", "Tamanho", "\u00daltima Modifica\u00e7\u00e3o"]).entries()) {
-        await C(f, "th", async m => {
-          m.e.innerText = g;
-          m.e.style.height = "1em";
-          await qc(m.g.l, `${h}`);
+    d.e.classList.add(oc);
+    await F(d, "tr", async e => {
+      e.e.setAttribute("lid", "header");
+      for (let [f, g] of Array.from(["Nome do Arauivo", "Tamanho", "\u00daltima Modifica\u00e7\u00e3o"]).entries()) {
+        await F(e, "th", async k => {
+          k.e.innerText = g;
+          k.e.style.height = "1em";
+          let h = await Bc(k.g.j, `${f}`);
+          k.e.style.width = `${h}px`;
         });
       }
     });
-    for (let [f, h] of Array.from(b.v).entries()) {
-      await C(e, "tr", async g => {
-        (b.g.C[c]?.includes(f + 1) ?? !1) && g.e.classList.add("ts");
-        let m = h.aa[c] ?? "", k = R(h, c).toLocaleString("pt-BR"), n = J.G.na(S(h, c, !1), !0);
-        h.M[c] || (n = k = "");
+    for (let [e, f] of Array.from(c.g.B).entries()) {
+      await F(d, "tr", async g => {
+        g.e.setAttribute("lid", f.I);
+        (c.g.g.D[b]?.includes(e + 1) ?? !1) && g.e.classList.add(qc);
+        let k = f.$[b] ?? "", h = R(f, b).toLocaleString("pt-BR"), m = w(S(f, b, !1), !0);
+        f.N[b] || (m = h = "");
         try {
-          await C(g, "td", async l => {
-            l.e.innerHTML = m;
+          await F(g, "td", async l => {
+            l.e.innerHTML = k;
             l.e.style.fontSize = "0.95em";
             l.e.style.overflow = "hidden";
             l.e.style.textOverflow = "ellipses";
-          }), await C(g, "td", async l => {
-            l.e.innerText = `${k}`;
+          }), await F(g, "td", async l => {
+            l.e.innerText = `${h}`;
             l.e.style.textAlign = "right";
             l.e.style.fontSize = "0.8em";
-          }), await C(g, "td", async l => {
-            l.e.innerText = n;
+          }), await F(g, "td", async l => {
+            l.e.innerText = m;
             l.e.style.textAlign = "center";
             l.e.style.fontSize = "0.8em";
           });
         } catch (l) {
-          console.log(f, h.name, l);
+          console.log(e, f.name, l);
         }
       });
     }
   });
 }
-;new I.O(W.W);
-function wc(a) {
-  function b(c) {
-    let d = c[0];
-    return async function(e) {
-      await dc();
-      e = await C(e, "div");
-      e.e.style.display = "flex";
-      e.e.style.justifyContent = "center";
-      e = await C(e, "div");
-      await uc(d, e);
-    };
-  }
-  Ta(a, async function(c) {
-    await C(c, "div", async d => {
-      d = fc(d.j, b, []);
-      await d.data.R();
-      await d.X();
-    });
-  });
-}
-;function xc(a, b, c = 3) {
-  let d = Ga();
-  "i" in d && (c = parseInt(d.i, 10));
-  Ua(a, b);
-  3 == c && wc(a);
-}
-var X = ["ploft_v1"], Y = aa;
-X[0] in Y || "undefined" == typeof Y.execScript || Y.execScript("var " + X[0]);
-for (var Z; X.length && (Z = X.shift());) {
-  X.length || void 0 === xc ? Y[Z] && Y[Z] !== Object.prototype[Z] ? Y = Y[Z] : Y = Y[Z] = {} : Y[Z] = xc;
-}
-;}).call(this);
+;var mc = "rz", oc = "ho", qc = "ts", tc = "ib", Z = "si", vc = "tc", xc = "dl", yc = "ftt", Y = "mn";
+T.ca = a => `<svg class="${Z}" fill="${a}"><use href ="#I001"></use></svg>`;
+T.ia = a => `<svg class="${Z}" fill="${a}"><use href ="#I004"></use></svg>`;
+T.da = a => `<svg class="${Z}" style="color:${a}" ><use href ="#ITEM"></use></svg>`;
+Qb.ra = yc;
+ba("run", async function(a) {
+  ca({el:a.el, ka:a.e, ua:"1:2"});
+  let b = new kc(a);
+  b.i.C = async function(c) {
+    c = await F(c, "div");
+    c.e.style.display = "flex";
+    c.e.style.justifyContent = "center";
+    c = await F(c, "div");
+    await Ec(b, c);
+  };
+  await jc(b);
+  await X(b, !1);
+});
+}).call(this);
 
-                </script>
-                <script>
-                    let el = document.getElementById('app');
-                    ploft_v1(el,true)
-                </script>
-
-            </html>
-
-
-        
+    </script>
+    <script>
+        let el = document.getElementById('app');
+        run({ el, e: 0 }); // 0 = página inteira
+    </script>
+</html>
